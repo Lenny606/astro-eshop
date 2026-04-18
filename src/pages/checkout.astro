@@ -1,0 +1,477 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Price from '../components/ui/Price.astro';
+
+// Tato stránka běží primárně na klientovi pro plynulý průchod kroky
+---
+
+<Layout title="Pokladna | Astro Shop">
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-4 tracking-tight">Dokončení objednávky</h1>
+    
+    <div id="checkout-container" class="opacity-0 transition-opacity duration-500">
+      <div id="steps-indicator">
+        {/* Bude renderováno klientským skriptem */}
+      </div>
+
+      {/* STEP 1: SUMMARY */}
+      <section id="step-1" class="checkout-step hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-8">
+          <div class="lg:col-span-2 space-y-6">
+            <h2 class="text-2xl font-bold mb-6">Váš košík</h2>
+            <div id="cart-items-list" class="space-y-4">
+              {/* Položky košíku */}
+            </div>
+          </div>
+          <div class="lg:col-span-1">
+            <div class="glass p-8 rounded-2xl sticky top-32">
+              <h3 class="text-xl font-bold mb-6">Shrnutí platby</h3>
+              <div class="space-y-4 mb-8">
+                <div class="flex justify-between text-on-surface/60">
+                  <span>Mezisoučet</span>
+                  <span id="subtotal-price">0 Kč</span>
+                </div>
+                <div class="flex justify-between text-on-surface/60">
+                  <span>Doprava</span>
+                  <span class="text-primary font-medium">Zdarma</span>
+                </div>
+                <div class="h-px bg-white/5 my-4"></div>
+                <div class="flex justify-between text-xl font-bold">
+                  <span>Celkem</span>
+                  <span id="total-price" class="text-primary font-display">0 Kč</span>
+                </div>
+              </div>
+              <Button id="to-step-2" class="w-full py-4 text-lg">Pokračovat k dopravě</Button>
+              <a href="/products" class="block text-center mt-4 text-sm text-on-surface/40 hover:text-white transition-colors">Zpět k nákupu</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* STEP 2: SHIPPING & PAYMENT */}
+      <section id="step-2" class="checkout-step hidden">
+        <div class="max-w-2xl mx-auto mt-8">
+          <h2 class="text-2xl font-bold mb-8">Doprava a platba</h2>
+          
+          <div class="space-y-8">
+            <div class="glass p-8 rounded-2xl space-y-6">
+              <h3 class="text-lg font-bold text-primary mb-4">Adresa doručení</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label class="text-sm text-on-surface/60 ml-1">Jméno a příjmení</label>
+                  <input type="text" id="name" class="checkout-input" placeholder="Jan Novák" />
+                  <span id="error-name" class="text-xs text-red-500 ml-1 hidden">Prosím zadejte své jméno</span>
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm text-on-surface/60 ml-1">Ulice a č.p.</label>
+                  <input type="text" id="street" class="checkout-input" placeholder="Hlavní 123" />
+                  <span id="error-street" class="text-xs text-red-500 ml-1 hidden">Zadejte ulici a číslo popisné</span>
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm text-on-surface/60 ml-1">Město</label>
+                  <input type="text" id="city" class="checkout-input" placeholder="Praha" />
+                  <span id="error-city" class="text-xs text-red-500 ml-1 hidden">Zadejte město</span>
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm text-on-surface/60 ml-1">PSČ</label>
+                  <input type="text" id="psc" class="checkout-input" placeholder="110 00" />
+                  <span id="error-psc" class="text-xs text-red-500 ml-1 hidden">Zadejte platné PSČ (5 číslic)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass p-8 rounded-2xl space-y-6">
+              <h3 class="text-lg font-bold text-primary mb-4">Způsob platby</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label class="payment-card group">
+                  <input type="radio" name="paymentMethod" value="karta" class="hidden" checked />
+                  <div class="payment-card-inner">
+                    <span class="font-bold">Platební karta</span>
+                    <span class="text-xs text-on-surface/40">Okamžitá platba online</span>
+                  </div>
+                </label>
+                <label class="payment-card group">
+                  <input type="radio" name="paymentMethod" value="prevod" class="hidden" />
+                  <div class="payment-card-inner">
+                    <span class="font-bold">Bankovní převod</span>
+                    <span class="text-xs text-on-surface/40">Zpracování trvá 1-2 dny</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <Button id="back-to-step-1" variant="ghost" class="flex-1">Zpět</Button>
+              <Button id="to-step-3" class="flex-2">Přejít k přehledu</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* STEP 3: REVIEW */}
+      <section id="step-3" class="checkout-step hidden">
+        <div class="max-w-2xl mx-auto mt-8">
+          <h2 class="text-2xl font-bold mb-8">Kontrola před odesláním</h2>
+          
+          <div class="space-y-6">
+            <div class="glass p-8 rounded-2xl">
+              <div class="flex justify-between items-start mb-6">
+                <h3 class="text-lg font-bold">Doručovací údaje</h3>
+                <button id="edit-address" class="text-sm text-primary hover:underline">Upravit</button>
+              </div>
+              <div id="review-address" class="text-on-surface/80 space-y-1">
+                {/* Dynamicky vyplněno */}
+              </div>
+            </div>
+
+            <div class="glass p-8 rounded-2xl">
+              <h3 class="text-lg font-bold mb-4">Platební metoda</h3>
+              <p id="review-payment" class="text-on-surface/80 uppercase tracking-wider font-medium"></p>
+            </div>
+
+            <div class="glass p-8 rounded-2xl">
+              <h3 class="text-lg font-bold mb-4">Položky</h3>
+              <div id="review-items" class="space-y-3">
+                {/* Dynamicky vyplněno */}
+              </div>
+              <div class="h-px bg-white/5 my-6"></div>
+              <div class="flex justify-between text-xl font-bold">
+                <span>Celkem k úhradě</span>
+                <span id="review-total" class="text-primary font-display"></span>
+              </div>
+            </div>
+
+            <div class="flex gap-4 pt-4">
+              <Button id="back-to-step-2" variant="ghost" class="flex-1">Zpět</Button>
+              <Button id="finalize-order" class="flex-2 py-4">Závazně objednat (Simulace)</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* STEP 4: STATUS */}
+      <section id="step-4" class="checkout-step hidden">
+        <div class="max-w-xl mx-auto mt-12 text-center">
+          <div id="status-success" class="hidden space-y-8">
+            <div class="w-24 h-24 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(34,197,94,0.2)]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h2 class="text-4xl font-bold">Děkujeme za objednávku!</h2>
+            <p id="order-id-display" class="text-xl text-on-surface/60"></p>
+            <p class="text-on-surface/40 max-w-sm mx-auto">Váš balíček začneme připravovat hned, jakmile dorazí platba.</p>
+            <Button href="/" variant="primary" size="lg" class="mt-8">Zpět na hlavní stránku</Button>
+          </div>
+
+          <div id="status-error" class="hidden space-y-8">
+            <div class="w-24 h-24 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <h2 class="text-3xl font-bold">Něco se nepovedlo</h2>
+            <p id="error-message" class="text-on-surface/60"></p>
+            <Button id="retry-checkout" variant="outline" class="mt-8">Zkusit znovu</Button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {/* Empty State */}
+    <div id="empty-cart" class="hidden text-center py-24 space-y-6">
+      <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto text-on-surface/20">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold">Váš košík je prázdný</h2>
+      <p class="text-on-surface/40">Vyberte si něco z naší nabídky prémiových produktů.</p>
+      <Button href="/products" variant="primary">Prohlédnout produkty</Button>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @reference "../styles/global.css";
+
+  .checkout-input {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-white;
+  }
+  
+  .payment-card {
+    @apply cursor-pointer block h-full;
+  }
+  
+  .payment-card-inner {
+    @apply h-full glass border border-white/10 rounded-xl p-6 flex flex-col gap-1 transition-all group-hover:bg-white/10;
+  }
+  
+  .payment-card input:checked + .payment-card-inner {
+    @apply border-primary bg-primary/10 shadow-[0_0_20px_rgba(var(--color-primary),0.1)];
+  }
+</style>
+
+<script>
+  import { cartStore, removeItem, updateQuantity, clearCart } from '../lib/stores/cart';
+  import { checkoutStore, updateCheckoutField, clearCheckout } from '../lib/stores/checkout';
+  import { actions } from 'astro:actions';
+
+  let currentStep = 1;
+
+  const container = document.getElementById('checkout-container');
+  const emptyState = document.getElementById('empty-cart');
+  const stepsIndicator = document.getElementById('steps-indicator');
+
+  // Funkce pro přepínání kroků
+  function setStep(step: number) {
+    currentStep = step;
+    
+    // Skrýt všechny kroky
+    document.querySelectorAll('.checkout-step').forEach(el => el.classList.add('hidden'));
+    
+    // Zobrazit aktuální krok
+    const currentEl = document.getElementById(`step-${step}`);
+    if (currentEl) currentEl.classList.remove('hidden');
+
+    // Aktualizovat indikátor (zde by bylo fajn volat CheckoutSteps komponentu, ale Astro je static)
+    // Proto ji budeme simulovat jednoduchou manipulací s DOM pro plynulost
+    renderSteps();
+    
+    // Scroll nahoru
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (step === 3) prepareReview();
+  }
+
+  function renderSteps() {
+    if (!stepsIndicator) return;
+    const steps = ['Košík', 'Doprava', 'Přehled', 'Dokončeno'];
+    let html = `
+      <div class="w-full py-8">
+        <div class="flex items-center justify-between relative max-w-2xl mx-auto px-4">
+          <div class="absolute top-1/2 left-0 w-full h-0.5 bg-white/10 -translate-y-1/2 -z-10"></div>
+          <div class="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 -z-10 transition-all duration-500" style="width: ${((currentStep - 1) / (steps.length - 1)) * 100}%"></div>
+          ${steps.map((name, i) => {
+            const stepNum = i + 1;
+            const isActive = currentStep >= stepNum;
+            const isCurrent = currentStep === stepNum;
+            return `
+              <div class="flex flex-col items-center gap-3">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all duration-500 ${isActive ? 'bg-primary text-black shadow-[0_0_20px_rgba(var(--color-primary),0.3)]' : 'bg-surface text-on-surface/40 border border-white/10'} ${isCurrent ? 'scale-110' : ''}">
+                  ${stepNum}
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 ${isActive ? 'text-primary' : 'text-on-surface/40'}">${name}</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+    stepsIndicator.innerHTML = html;
+  }
+
+  // Sledování košíku
+  cartStore.subscribe(cart => {
+    const items = Object.values(cart);
+    
+    if (items.length === 0 && currentStep < 4) {
+      container?.classList.add('hidden');
+      emptyState?.classList.remove('hidden');
+    } else {
+      container?.classList.remove('hidden');
+      container?.classList.add('opacity-100');
+      emptyState?.classList.add('hidden');
+      renderCartList(items);
+      updatePrices(items);
+    }
+  });
+
+  function renderCartList(items: any[]) {
+    const list = document.getElementById('cart-items-list');
+    if (!list) return;
+
+    list.innerHTML = items.map(item => `
+      <div class="glass p-4 rounded-xl flex gap-4 items-center">
+        <img src="${item.image || ''}" class="w-20 h-20 object-cover rounded-lg" />
+        <div class="flex-grow">
+          <h4 class="font-bold">${item.name}</h4>
+          <span class="text-sm text-on-surface/60">${item.price} Kč / ks</span>
+        </div>
+        <div class="flex items-center gap-3 bg-white/5 rounded-lg border border-white/5 p-1">
+          <button class="w-8 h-8 hover:bg-white/5 rounded-md decrease-qty" data-id="${item.id}">-</button>
+          <span class="w-6 text-center font-bold">${item.quantity}</span>
+          <button class="w-8 h-8 hover:bg-white/5 rounded-md increase-qty" data-id="${item.id}">+</button>
+        </div>
+        <div class="text-right min-w-[80px]">
+          <div class="font-bold">${item.price * item.quantity} Kč</div>
+          <button class="text-xs text-red-400 hover:text-red-300 remove-item" data-id="${item.id}">Odstranit</button>
+        </div>
+      </div>
+    `).join('');
+
+    // Event listenery pro tlačítka v košíku
+    document.querySelectorAll('.increase-qty').forEach(b => b.addEventListener('click', () => {
+      const id = b.getAttribute('data-id')!;
+      updateQuantity(id, cartStore.get()[id].quantity + 1);
+    }));
+    document.querySelectorAll('.decrease-qty').forEach(b => b.addEventListener('click', () => {
+      const id = b.getAttribute('data-id')!;
+      updateQuantity(id, cartStore.get()[id].quantity - 1);
+    }));
+    document.querySelectorAll('.remove-item').forEach(b => b.addEventListener('click', () => {
+      removeItem(b.getAttribute('data-id')!);
+    }));
+  }
+
+  function updatePrices(items: any[]) {
+    const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    const subtotalEl = document.getElementById('subtotal-price');
+    const totalEl = document.getElementById('total-price');
+    if (subtotalEl) subtotalEl.textContent = `${total} Kč`;
+    if (totalEl) totalEl.textContent = `${total} Kč`;
+  }
+
+  // Sledování změn ve formuláři (Krok 2)
+  ['name', 'street', 'city', 'psc'].forEach(id => {
+    const input = document.getElementById(id) as HTMLInputElement;
+    if (input) {
+      input.value = checkoutStore.get()[id as keyof typeof checkoutStore.value] || '';
+      input.addEventListener('input', () => updateCheckoutField(id as any, input.value));
+    }
+  });
+
+  document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
+    const radio = input as HTMLInputElement;
+    if (radio.value === checkoutStore.get().paymentMethod) radio.checked = true;
+    radio.addEventListener('change', () => updateCheckoutField('paymentMethod', radio.value as any));
+  });
+
+  // Navigace po krocích
+  document.getElementById('to-step-2')?.addEventListener('click', () => setStep(2));
+  document.getElementById('back-to-step-1')?.addEventListener('click', () => setStep(1));
+  document.getElementById('to-step-3')?.addEventListener('click', () => {
+    const { name, street, city, psc } = checkoutStore.get();
+    let hasError = false;
+
+    // Reset chyb
+    document.querySelectorAll('[id^="error-"]').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.checkout-input').forEach(el => el.classList.remove('border-red-500'));
+
+    if (!name.trim()) {
+      document.getElementById('error-name')?.classList.remove('hidden');
+      document.getElementById('name')?.classList.add('border-red-500');
+      hasError = true;
+    }
+    if (!street.trim()) {
+      document.getElementById('error-street')?.classList.remove('hidden');
+      document.getElementById('street')?.classList.add('border-red-500');
+      hasError = true;
+    }
+    if (!city.trim()) {
+      document.getElementById('error-city')?.classList.remove('hidden');
+      document.getElementById('city')?.classList.add('border-red-500');
+      hasError = true;
+    }
+    const pscRegex = /^\d{3}\s?\d{2}$/;
+    if (!pscRegex.test(psc.trim())) {
+      document.getElementById('error-psc')?.classList.remove('hidden');
+      document.getElementById('psc')?.classList.add('border-red-500');
+      hasError = true;
+    }
+
+    if (hasError) return;
+    setStep(3);
+  });
+  document.getElementById('back-to-step-2')?.addEventListener('click', () => setStep(2));
+  document.getElementById('edit-address')?.addEventListener('click', () => setStep(2));
+
+  function prepareReview() {
+    const { name, street, city, psc, paymentMethod } = checkoutStore.get();
+    const addressReview = document.getElementById('review-address');
+    if (addressReview) {
+      addressReview.innerHTML = `
+        <p class="font-bold text-white">${name}</p>
+        <p>${street}</p>
+        <p>${psc} ${city}</p>
+      `;
+    }
+    
+    const paymentReview = document.getElementById('review-payment');
+    if (paymentReview) paymentReview.textContent = paymentMethod === 'karta' ? 'Platební karta' : 'Bankovní převod';
+
+    const itemsReview = document.getElementById('review-items');
+    const items = Object.values(cartStore.get());
+    if (itemsReview) {
+      itemsReview.innerHTML = items.map(item => `
+        <div class="flex justify-between text-sm">
+          <span>${item.name} <span class="text-on-surface/40">x ${item.quantity}</span></span>
+          <span>${item.price * item.quantity} Kč</span>
+        </div>
+      `).join('');
+    }
+
+    const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    const totalReview = document.getElementById('review-total');
+    if (totalReview) totalReview.textContent = `${total} Kč`;
+  }
+
+  // Finální odeslání
+  const finalizeBtn = document.getElementById('finalize-order');
+  finalizeBtn?.addEventListener('click', async () => {
+    finalizeBtn.setAttribute('disabled', 'true');
+    const originalText = finalizeBtn.innerHTML;
+    finalizeBtn.innerHTML = `
+      <div class="flex items-center justify-center gap-3">
+        <svg class="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Zpracovávám...</span>
+      </div>
+    `;
+    
+    const { data, error } = await actions.simulateOrder({
+      items: Object.values(cartStore.get()).map(i => ({ id: i.id, quantity: i.quantity })),
+      customer: checkoutStore.get()
+    });
+
+    finalizeBtn.removeAttribute('disabled');
+    finalizeBtn.innerHTML = originalText;
+
+    setStep(4);
+    
+    const successDiv = document.getElementById('status-success');
+    const errorDiv = document.getElementById('status-error');
+
+    if (error) {
+      errorDiv?.classList.remove('hidden');
+      successDiv?.classList.add('hidden');
+      const errorMsg = document.getElementById('error-message');
+      if (errorMsg) errorMsg.textContent = error.message;
+    } else {
+      successDiv?.classList.remove('hidden');
+      errorDiv?.classList.add('hidden');
+      const orderIdEl = document.getElementById('order-id-display');
+      if (orderIdEl) orderIdEl.textContent = `Číslo objednávky: ${data.orderId}`;
+      
+      // Vyčistit košík a checkout data po úspěchu
+      clearCart();
+      clearCheckout();
+    }
+  });
+
+  document.getElementById('retry-checkout')?.addEventListener('click', () => setStep(3));
+
+  // Zajištění, že kliknutí na košík v navigaci vždy vede na první krok
+  document.getElementById('cart-nav-link')?.addEventListener('click', (e) => {
+    if (window.location.pathname === '/checkout') {
+      e.preventDefault();
+      setStep(1);
+    }
+  });
+
+  // Inicializace prvního kroku
+  setStep(1);
+</script>

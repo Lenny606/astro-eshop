@@ -61,10 +61,26 @@ const canonicalURL = Astro.site
 					<a href="/products" class="hover:text-primary transition-colors">Products</a>
 					<a href="/categories" class="hover:text-primary transition-colors">Categories</a>
 					<a href="/about" class="hover:text-primary transition-colors">About</a>
-					<button class="premium-btn py-2 px-6 text-sm">Cart (0)</button>
+					<a href="/checkout" id="cart-nav-link" class="premium-btn py-2 px-6 text-sm flex items-center gap-2">
+						<span>Cart</span>
+						<span id="cart-count" class="bg-white/20 px-2 rounded-full min-w-[20px] text-center">0</span>
+					</a>
 				</div>
 			</div>
 		</nav>
+
+		<script>
+			import { cartStore } from '../lib/stores/cart';
+			
+			const cartCount = document.getElementById('cart-count');
+			
+			if (cartCount) {
+				cartStore.subscribe((cart) => {
+					const count = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
+					cartCount.textContent = count.toString();
+				});
+			}
+		</script>
 
 		<main id="content" class="flex-grow pt-24">
 			<slot />

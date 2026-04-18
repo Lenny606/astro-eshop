@@ -52,4 +52,37 @@ export const server = {
       }
     },
   }),
+
+  simulateOrder: defineAction({
+    input: z.object({
+      items: z.array(z.object({
+        id: z.string(),
+        quantity: z.number(),
+      })),
+      customer: z.object({
+        name: z.string(),
+        street: z.string(),
+        city: z.string(),
+        psc: z.string(),
+        paymentMethod: z.string(),
+      }),
+    }),
+    handler: async ({ items, customer }) => {
+      logger.info({ items, customer }, 'Action: simulateOrder triggered');
+      
+      // Simulace náhodné chyby (např. 1 z 10)
+      const isError = Math.random() < 0.1;
+      
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulace síťového zpoždění
+      
+      if (isError) {
+        throw new Error('Platba byla zamítnuta bankou.');
+      }
+      
+      return { 
+        success: true, 
+        orderId: `ORD-${Math.random().toString(36).substr(2, 9).toUpperCase()}` 
+      };
+    },
+  }),
 };

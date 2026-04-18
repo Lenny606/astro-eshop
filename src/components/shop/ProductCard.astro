@@ -45,11 +45,45 @@ const isOutOfStock = stock <= 0;
 
     {/* Quick Action Overlay */}
     <div class="absolute inset-0 z-20 flex items-end justify-center p-6 opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-      <Button variant="primary" class="w-full shadow-2xl" disabled={isOutOfStock}>
+      <Button 
+        variant="primary" 
+        class="w-full shadow-2xl add-to-cart-btn" 
+        disabled={isOutOfStock}
+        data-product={JSON.stringify(product)}
+      >
         {isOutOfStock ? 'Nedostupné' : 'Přidat do košíku'}
       </Button>
     </div>
   </div>
+
+  <script>
+    import { addItem } from '../../lib/stores/cart';
+    
+    const buttons = document.querySelectorAll('.add-to-cart-btn');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const productData = button.getAttribute('data-product');
+        if (productData) {
+          const product = JSON.parse(productData);
+          addItem(product);
+          
+          // Volitelná zpětná vazba (např. změna textu nebo animace)
+          const originalText = button.textContent;
+          button.textContent = 'Přidáno! ✓';
+          button.classList.add('bg-green-600');
+          
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('bg-green-600');
+          }, 1500);
+        }
+      });
+    });
+  </script>
 
   {/* Content */}
   <div class="flex flex-1 flex-col p-6 items-center text-center relative">
