@@ -14,43 +14,90 @@ export const server = {
     },
   }),
 
-  createCheckoutSession: defineAction({
+  initiateStripeCheckout: defineAction({
     input: z.object({
-      productId: z.string(),
-      quantity: z.number().min(1),
+      items: z.array(z.object({
+        id: z.string(),
+        quantity: z.number().min(1),
+      })),
+      customer: z.object({
+        email: z.string().email(),
+        name: z.string(),
+        street: z.string(),
+        city: z.string(),
+        psc: z.string(),
+      }),
     }),
-    handler: async ({ productId, quantity }) => {
-      logger.info({ productId, quantity }, 'Action: createCheckoutSession triggered');
+    handler: async ({ items, customer }) => {
+      logger.info({ customer, itemsCount: items.length }, 'Action: initiateStripeCheckout triggered');
       
-      const product = await productRepository.findById(productId);
-      if (!product) throw new Error('Product not found');
-
       try {
-        const session = await stripe.checkout.sessions.create({
-          line_items: [
-            {
-              price_data: {
-                currency: 'usd',
-                product_data: {
-                  name: product.name,
-                  description: product.description,
-                  images: product.image ? [product.image] : [],
-                },
-                // product.price is now in minor units (cents)
-                unit_amount: product.price,
+        // 1. Fetch real product data
+        const productsFromDb = await Promise.all(
+          items.map(item => productRepository.findById(item.id))
+        );
+
+        const lineItems = items.map(item => {
+          const product = productsFromDb.find(p => p?.id === item.id);
+          if (!product) throw new Error(`Produkt ${item.id} nebyl nalezen`);
+          
+          return {
+            price_data: {
+              currency: 'czk',
+              product_data: {
+                name: product.name,
+                description: product.description,
+                images: product.image ? [product.image] : [],
               },
-              quantity: quantity,
+              unit_amount: product.price, // v haléřích
             },
-          ],
-          mode: 'payment',
-          success_url: `${import.meta.env.PUBLIC_SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${import.meta.env.PUBLIC_SITE_URL}/cancel`,
+            quantity: item.quantity,
+          };
         });
+
+        const orderItemsData = items.map(item => {
+          const product = productsFromDb.find(p => p?.id === item.id);
+          return {
+            productId: item.id,
+            quantity: item.quantity,
+            price: product!.price,
+          };
+        });
+
+        const total = orderItemsData.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+        // 2. Create pending order in DB
+        const { orderId } = await orderRepository.createOrder({
+          customerEmail: customer.email,
+          shippingName: customer.name,
+          shippingStreet: customer.street,
+          shippingCity: customer.city,
+          shippingPsc: customer.psc,
+          paymentMethod: 'karta',
+          total,
+          items: orderItemsData,
+        });
+
+        // 3. Create Stripe Session
+        const session = await stripe.checkout.sessions.create({
+          line_items: lineItems,
+          mode: 'payment',
+          customer_email: customer.email,
+          client_reference_id: orderId,
+          metadata: { orderId },
+          success_url: `${import.meta.env.PUBLIC_SITE_URL}/api/checkout/verify?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${import.meta.env.PUBLIC_SITE_URL}/checkout?step=3&error=cancelled`,
+        });
+
+        // 4. Link session ID to order (Background update, doesn't need to block redirect)
+        orderRepository.update(orderId, { stripeSessionId: session.id }).catch((err: Error) => 
+          logger.error({ err, orderId, sessionId: session.id }, 'Failed to link stripe session ID to order')
+        );
 
         return { url: session.url };
       } catch (error) {
-        logger.error({ error, productId }, 'Action: createCheckoutSession failed');
-        throw new PaymentError(error instanceof Error ? error.message : 'Stripe session creation failed');
+        logger.error({ error }, 'Action: initiateStripeCheckout failed');
+        throw new PaymentError(error instanceof Error ? error.message : 'Stripe checkout initiation failed');
       }
     },
   }),
@@ -74,10 +121,8 @@ export const server = {
       logger.info({ items, customer }, 'Action: simulateOrder triggered');
       
       try {
-        // Fetch real product data for prices
-        const productIds = items.map(i => i.id);
         const productsFromDb = await Promise.all(
-          productIds.map(id => productRepository.findById(id))
+          items.map(id => productRepository.findById(id.id))
         );
 
         const orderItemsData = items.map(item => {
@@ -86,13 +131,12 @@ export const server = {
           return {
             productId: item.id,
             quantity: item.quantity,
-            price: product.price, // already in minor units
+            price: product.price,
           };
         });
 
         const total = orderItemsData.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
-        // Persistent storage via Repository (includes transaction and stock update)
         const { orderId } = await orderRepository.createOrder({
           customerEmail: customer.email,
           shippingName: customer.name,
@@ -104,19 +148,11 @@ export const server = {
           items: orderItemsData,
         });
 
-        // Simulační zpoždění pro lepší UX
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        logger.info({ orderId }, 'Action: simulateOrder success - returning to client');
-        return { 
-          success: true, 
-          orderId 
-        };
+        return { success: true, orderId };
       } catch (error) {
-        logger.error({ 
-          error: error instanceof Error ? { message: error.message, stack: error.stack } : error, 
-          customer 
-        }, 'Action: simulateOrder failed');
+        logger.error({ error }, 'Action: simulateOrder failed');
         throw new Error(error instanceof Error ? error.message : 'Objednávku se nepodařilo zpracovat.');
       }
     },

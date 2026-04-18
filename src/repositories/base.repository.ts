@@ -37,4 +37,17 @@ export abstract class BaseRepository<T extends SQLiteTable> {
       throw new DatabaseError();
     }
   }
+
+  async update(id: string, data: Partial<any>) {
+    try {
+      await db.update(this.table)
+        .set(data)
+        .where(eq((this.table as any).id, id))
+        .run();
+      logger.info({ id, table: this.table._.name }, 'BaseRepository: update success');
+    } catch (error) {
+      logger.error({ error, id, data, table: this.table._.name }, 'BaseRepository: update failed');
+      throw new DatabaseError();
+    }
+  }
 }

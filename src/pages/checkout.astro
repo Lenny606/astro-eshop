@@ -454,6 +454,9 @@ import Price from '../components/ui/Price.astro';
   // Finální odeslání
   const finalizeBtn = document.getElementById('finalize-order');
   finalizeBtn?.addEventListener('click', async () => {
+    const { paymentMethod, ...customer } = checkoutStore.get();
+    const items = Object.values(cartStore.get());
+    
     finalizeBtn.setAttribute('disabled', 'true');
     const originalText = finalizeBtn.innerHTML;
     finalizeBtn.innerHTML = `
@@ -462,11 +465,32 @@ import Price from '../components/ui/Price.astro';
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <span>Zpracovávám...</span>
+        <span>${paymentMethod === 'karta' ? 'Přesměrovávám na Stripe...' : 'Zpracovávám...'}</span>
       </div>
     `;
     
-    const items = Object.values(cartStore.get());
+    if (paymentMethod === 'karta') {
+      const { data, error } = await actions.initiateStripeCheckout({
+        items: items.map(i => ({ id: i.id, quantity: i.quantity })),
+        customer
+      });
+
+      if (error) {
+        finalizeBtn.removeAttribute('disabled');
+        finalizeBtn.innerHTML = originalText;
+        setStep(4);
+        document.getElementById('status-error')?.classList.remove('hidden');
+        const errorMsg = document.getElementById('error-message');
+        if (errorMsg) errorMsg.textContent = error.message;
+      } else if (data?.url) {
+        // Vyčistíme košík (volitelné, ale Stripe je "point of no return" v tomto flow)
+        // trackBeginCheckout už proběhl dříve
+        window.location.href = data.url;
+      }
+      return;
+    }
+
+    // Původní simulace pro ostatní metody (např. převod)
     const { data, error } = await actions.simulateOrder({
       items: items.map(i => ({ id: i.id, quantity: i.quantity })),
       customer: checkoutStore.get()
@@ -491,10 +515,8 @@ import Price from '../components/ui/Price.astro';
       const orderIdEl = document.getElementById('order-id-display');
       if (orderIdEl) orderIdEl.textContent = `Číslo objednávky: ${data.orderId}`;
       
-      // Track Purchase
       trackPurchase(data.orderId, items);
 
-      // Vyčistit košík a checkout data po úspěchu
       clearCart();
       clearCheckout();
     }

@@ -13,6 +13,7 @@ export interface CreateOrderData {
   shippingPsc: string;
   paymentMethod: 'karta' | 'prevod';
   total: number;
+  stripeSessionId?: string;
   items: {
     productId: string;
     quantity: number;
@@ -40,6 +41,7 @@ export class OrderRepository extends BaseRepository<typeof orders> {
           shippingPsc: data.shippingPsc,
           paymentMethod: data.paymentMethod,
           total: data.total,
+          stripeSessionId: data.stripeSessionId,
           status: 'pending',
           createdAt: new Date(),
         }).run();
@@ -97,6 +99,30 @@ export class OrderRepository extends BaseRepository<typeof orders> {
       });
     } catch (error) {
       logger.error({ error, id }, 'OrderRepository: findWithItems failed');
+      throw new DatabaseError();
+    }
+  }
+
+  async findByStripeSessionId(sessionId: string) {
+    try {
+      return await db.query.orders.findFirst({
+        where: (orders, { eq }) => eq(orders.stripeSessionId, sessionId),
+      });
+    } catch (error) {
+      logger.error({ error, sessionId }, 'OrderRepository: findByStripeSessionId failed');
+      throw new DatabaseError();
+    }
+  }
+
+  async updateStatus(id: string, status: 'pending' | 'paid' | 'shipped' | 'cancelled') {
+    try {
+      await db.update(orders)
+        .set({ status })
+        .where(eq(orders.id, id))
+        .run();
+      logger.info({ id, status }, 'OrderRepository: status updated');
+    } catch (error) {
+      logger.error({ error, id, status }, 'OrderRepository: updateStatus failed');
       throw new DatabaseError();
     }
   }

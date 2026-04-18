@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+import { orderRepository } from '../../repositories/order.repository';
+
+const orderId = Astro.url.searchParams.get('order_id');
+let order = null;
+
+if (orderId) {
+  order = await orderRepository.findWithItems(orderId);
+}
+---
+
+<Layout title="Děkujeme za objednávku! | Astro Shop">
+  <div class="max-w-3xl mx-auto px-6 py-24 text-center">
+    <div class="mb-12">
+      <div class="w-24 h-24 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(34,197,94,0.3)] animate-pulse">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h1 class="text-5xl font-bold mb-4 tracking-tight">Platba proběhla úspěšně!</h1>
+      <p class="text-xl text-on-surface/60">Vaše objednávka <span class="text-white font-mono">{orderId}</span> byla přijata.</p>
+    </div>
+
+    <div class="glass p-8 rounded-3xl text-left mb-12 border border-white/10 relative overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[100px] rounded-full"></div>
+      
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-2 h-8 bg-primary rounded-full"></span>
+        Shrnutí objednávky
+      </h2>
+
+      {order ? (
+        <div class="space-y-6">
+          <div class="space-y-3">
+            {order.items.map((item: any) => (
+              <div class="flex justify-between items-center py-3 border-b border-white/5">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-lg bg-white/5 overflow-hidden">
+                    <img src={item.product?.image} alt={item.product?.name} class="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <p class="font-bold">{item.product?.name}</p>
+                    <p class="text-sm text-on-surface/40">{item.quantity} ks</p>
+                  </div>
+                </div>
+                <span class="font-medium">{(item.priceAtPurchase * item.quantity) / 100} Kč</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="flex justify-between items-center pt-4">
+            <span class="text-on-surface/60 italic text-sm">Doprava zdarma v rámci promo akce</span>
+            <div class="text-right">
+              <p class="text-sm text-on-surface/40 uppercase tracking-widest font-bold">Celkem</p>
+              <p class="text-3xl font-bold text-primary font-display">{order.total / 100} Kč</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <p class="text-on-surface/40 italic">Načítám detaily objednávky...</p>
+      )}
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <Button href="/" variant="primary" size="lg" class="min-w-[200px]">Zpět do obchodu</Button>
+      <Button href="/products" variant="outline" size="lg" class="min-w-[200px]">Nakupovat dále</Button>
+    </div>
+    
+    <p class="mt-12 text-sm text-on-surface/30">
+        Potvrzení objednávky jsme odeslali na váš e-mail. <br />
+        V případě dotazů nás kontaktujte na podpora@astroshop.cz
+    </p>
+  </div>
+</Layout>
+
+<style>
+    @reference "../../styles/global.css";
+</style>
