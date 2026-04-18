@@ -31,12 +31,12 @@ const { className } = Astro.props;
   <!-- Results Dropdown -->
   <div 
     id="search-results" 
-    class="absolute top-full left-0 right-0 mt-3 glass border border-white/10 rounded-2xl shadow-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-[100] transform-gpu origin-top"
+    class="absolute top-full left-0 right-0 mt-3 bg-surface/98 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-[100] transform-gpu origin-top"
   >
     <div id="results-content" class="max-h-[60vh] overflow-y-auto p-2 space-y-1 custom-scrollbar">
       <!-- Results injected here -->
     </div>
-    <div id="search-footer" class="p-3 border-t border-white/5 text-center bg-white/2">
+    <div id="search-footer" class="p-3 border-t border-white/5 text-center bg-white/5">
       <p class="text-xs text-on-surface/40 italic">Zadejte alespoň 2 znaky pro vyhledávání</p>
     </div>
   </div>
@@ -139,8 +139,8 @@ const { className } = Astro.props;
     }
 
     resultsContent.innerHTML = products.map(product => `
-      <a href="/product/${product.slug}" class="flex items-center gap-4 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group/item border border-transparent hover:border-white/5">
-        <div class="w-12 h-12 rounded-lg overflow-hidden bg-white/5 flex-shrink-0">
+      <a href="/product/${product.slug}" class="flex items-center gap-4 p-2 rounded-xl hover:bg-white/15 transition-all duration-200 group/item border border-transparent hover:border-white/10">
+        <div class="w-12 h-12 rounded-lg overflow-hidden bg-white/10 flex-shrink-0">
           <img src="${product.image || '/placeholder.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500" />
         </div>
         <div class="flex-grow min-w-0">
@@ -148,8 +148,8 @@ const { className } = Astro.props;
             <h4 class="font-bold text-sm truncate group-hover/item:text-primary transition-colors">${product.name}</h4>
             <span class="text-xs font-black text-primary whitespace-nowrap">${(product.price / 100).toLocaleString('cs-CZ')} Kč</span>
           </div>
-          <p class="text-[10px] text-on-surface/40 uppercase tracking-widest font-black">${product.category?.name || 'Produkt'}</p>
-          <p class="text-[11px] text-on-surface/60 line-clamp-1 mt-0.5">${product.description}</p>
+          <p class="text-[10px] text-on-surface/60 uppercase tracking-widest font-black">${product.category?.name || 'Produkt'}</p>
+          <p class="text-[11px] text-on-surface/80 line-clamp-1 mt-0.5">${product.description}</p>
         </div>
       </a>
     `).join('');
