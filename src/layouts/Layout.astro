@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { categoryRepository } from '../repositories/category.repository';
+import Search from '../components/ui/Search.astro';
 import type { Category } from '../types';
 
 interface Props {
@@ -79,41 +80,50 @@ const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 				height="0" width="0" style="display:none;visibility:hidden"></iframe>
 			</noscript>
 		)}
-		<nav id="main-nav" class="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6">
-			<div class="max-w-7xl mx-auto flex justify-center md:justify-between items-center">
+		<nav id="main-nav" class="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 h-20 flex items-center">
+			<div class="max-w-7xl mx-auto w-full grid grid-cols-2 md:grid-cols-[200px_1fr_auto] items-center gap-6">
 				<a href="/" class="text-2xl font-display font-black gradient-text">ASTRO SHOP</a>
-				<div class="hidden md:flex gap-8 items-center font-medium">
-					<a href="/products" class="hover:text-primary transition-colors">Products</a>
-					
-					<div class="group relative py-2">
-						<a href="/categories" class="hover:text-primary transition-colors flex items-center gap-1">
-							Categories
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 group-hover:rotate-180 transition-transform duration-300"><path d="m6 9 6 6 6-6"/></svg>
-						</a>
-						<div class="absolute top-full left-0 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-							<div class="glass bg-white/10 min-w-[240px] p-2 rounded-xl border border-white/10 shadow-2xl backdrop-blur-xl">
-								<div class="grid grid-cols-1 gap-1">
-									{mainCategories.map((category: Category) => (
-										<a href={`/category/${category.slug}`} class="px-4 py-2.5 rounded-lg hover:bg-white/20 transition-colors text-sm font-medium whitespace-nowrap text-center">
-											{category.name}
+				
+				<div class="hidden md:block">
+					<Search />
+				</div>
+
+				<div class="flex gap-4 md:gap-8 items-center font-medium justify-end">
+					<div class="hidden md:flex gap-8 items-center">
+						<a href="/products" class="hover:text-primary transition-colors">Products</a>
+						
+						<div class="group relative py-2">
+							<a href="/categories" class="hover:text-primary transition-colors flex items-center gap-1">
+								Categories
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 group-hover:rotate-180 transition-transform duration-300"><path d="m6 9 6 6 6-6"/></svg>
+							</a>
+							<div class="absolute top-full left-0 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
+								<div class="glass bg-white/10 min-w-[240px] p-2 rounded-xl border border-white/10 shadow-2xl backdrop-blur-xl">
+									<div class="grid grid-cols-1 gap-1">
+										{mainCategories.map((category: Category) => (
+											<a href={`/category/${category.slug}`} class="px-4 py-2.5 rounded-lg hover:bg-white/20 transition-colors text-sm font-medium whitespace-nowrap text-center">
+												{category.name}
+											</a>
+										))}
+									</div>
+									<div class="mt-2 pt-2 border-t border-white/5">
+										<a href="/categories" class="block px-4 py-2 text-xs text-on-surface/50 hover:text-primary transition-colors text-center italic">
+											View All Categories →
 										</a>
-									))}
-								</div>
-								<div class="mt-2 pt-2 border-t border-white/5">
-									<a href="/categories" class="block px-4 py-2 text-xs text-on-surface/50 hover:text-primary transition-colors text-center italic">
-										View All Categories →
-									</a>
+									</div>
 								</div>
 							</div>
 						</div>
+						<a href="/about" class="hover:text-primary transition-colors">About</a>
 					</div>
-					<a href="/about" class="hover:text-primary transition-colors">About</a>
+					
 					<a href="/checkout" id="cart-nav-link" class="premium-btn py-2 px-6 text-sm flex items-center gap-2">
-						<span>Cart</span>
+						<span class="hidden sm:inline">Cart</span>
 						<span id="cart-count" class="bg-white/20 px-2 rounded-full min-w-[20px] text-center">0</span>
 					</a>
 				</div>
 			</div>
+			{/* Mobile Search Overlay Trigger (Optional, but keeping desktop centered for now) */}
 		</nav>
 
 		<script>

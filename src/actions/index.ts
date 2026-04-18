@@ -157,4 +157,14 @@ export const server = {
       }
     },
   }),
+
+  searchProducts: defineAction({
+    input: z.object({
+      query: z.string().min(2),
+    }),
+    handler: async ({ query }) => {
+      logger.info({ query }, 'Action: searchProducts triggered');
+      return await productRepository.search(query);
+    },
+  }),
 };

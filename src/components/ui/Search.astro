@@ -1,0 +1,199 @@
+---
+import { actions } from 'astro:actions';
+import Price from './Price.astro';
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class:list={["relative w-full max-w-md mx-auto group", className]} id="search-container">
+  <div class="relative flex items-center">
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Hledat produkty..."
+      class="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-12 pr-4 focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all duration-300 backdrop-blur-md text-sm"
+      autocomplete="off"
+    />
+    <div class="absolute left-4 text-on-surface/40 group-focus-within:text-primary transition-colors duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div id="search-loader" class="absolute right-4 opacity-0 transition-opacity duration-300">
+      <div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  </div>
+
+  <!-- Results Dropdown -->
+  <div 
+    id="search-results" 
+    class="absolute top-full left-0 right-0 mt-3 glass border border-white/10 rounded-2xl shadow-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-[100] transform-gpu origin-top"
+  >
+    <div id="results-content" class="max-h-[60vh] overflow-y-auto p-2 space-y-1 custom-scrollbar">
+      <!-- Results injected here -->
+    </div>
+    <div id="search-footer" class="p-3 border-t border-white/5 text-center bg-white/2">
+      <p class="text-xs text-on-surface/40 italic">Zadejte alespoň 2 znaky pro vyhledávání</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+</style>
+
+<script>
+  import { actions } from 'astro:actions';
+  import { gsap } from 'gsap';
+
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const searchResults = document.getElementById('search-results');
+  const resultsContent = document.getElementById('results-content');
+  const searchLoader = document.getElementById('search-loader');
+  const searchFooter = document.getElementById('search-footer');
+
+  let debounceTimer: ReturnType<typeof setTimeout>;
+
+  const showResults = () => {
+    if (!searchResults) return;
+    gsap.to(searchResults, {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      pointerEvents: 'auto',
+      duration: 0.4,
+      ease: 'back.out(1.7)'
+    });
+  };
+
+  const hideResults = () => {
+    if (!searchResults) return;
+    gsap.to(searchResults, {
+      opacity: 0,
+      scale: 0.95,
+      y: -10,
+      pointerEvents: 'none',
+      duration: 0.3,
+      ease: 'power2.in'
+    });
+  };
+
+  const handleSearch = async (query: string) => {
+    if (query.length < 2) {
+      if (resultsContent) resultsContent.innerHTML = '';
+      if (searchFooter) searchFooter.innerHTML = '<p class="text-xs text-on-surface/40 italic">Zadejte alespoň 2 znaky pro vyhledávání</p>';
+      hideResults();
+      return;
+    }
+
+    if (searchLoader) searchLoader.style.opacity = '1';
+    
+    try {
+      const { data, error } = await actions.searchProducts({ query });
+      
+      if (searchLoader) searchLoader.style.opacity = '0';
+      
+      if (error) {
+        console.error('Search error:', error);
+        return;
+      }
+
+      const products = data || [];
+      renderResults(products, query);
+      showResults();
+    } catch (err) {
+      if (searchLoader) searchLoader.style.opacity = '0';
+      console.error('Search failed:', err);
+    }
+  };
+
+  const renderResults = (products: any[], query: string) => {
+    if (!resultsContent || !searchFooter) return;
+
+    if (products.length === 0) {
+      resultsContent.innerHTML = `
+        <div class="py-12 text-center space-y-2">
+          <div class="text-4xl">🔍</div>
+          <p class="text-on-surface/60 font-medium">Nic jsme nenašly pro "${query}"</p>
+          <p class="text-xs text-on-surface/40">Zkuste jiný termín nebo zkontrolujte překlepy.</p>
+        </div>
+      `;
+      searchFooter.innerHTML = '';
+      return;
+    }
+
+    resultsContent.innerHTML = products.map(product => `
+      <a href="/product/${product.slug}" class="flex items-center gap-4 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group/item border border-transparent hover:border-white/5">
+        <div class="w-12 h-12 rounded-lg overflow-hidden bg-white/5 flex-shrink-0">
+          <img src="${product.image || '/placeholder.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500" />
+        </div>
+        <div class="flex-grow min-w-0">
+          <div class="flex justify-between items-start gap-2">
+            <h4 class="font-bold text-sm truncate group-hover/item:text-primary transition-colors">${product.name}</h4>
+            <span class="text-xs font-black text-primary whitespace-nowrap">${(product.price / 100).toLocaleString('cs-CZ')} Kč</span>
+          </div>
+          <p class="text-[10px] text-on-surface/40 uppercase tracking-widest font-black">${product.category?.name || 'Produkt'}</p>
+          <p class="text-[11px] text-on-surface/60 line-clamp-1 mt-0.5">${product.description}</p>
+        </div>
+      </a>
+    `).join('');
+
+    searchFooter.innerHTML = `
+      <p class="text-xs text-on-surface/40">Nalezeno ${products.length} výsledků</p>
+    `;
+
+    // Animate individual items
+    gsap.from('#results-content a', {
+      x: -10,
+      opacity: 0,
+      stagger: 0.05,
+      duration: 0.4,
+      ease: 'power2.out'
+    });
+  };
+
+  searchInput?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => handleSearch(query), 300);
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    const container = document.getElementById('search-container');
+    if (container && !container.contains(e.target as Node)) {
+      hideResults();
+    }
+  });
+
+  // Handle Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      hideResults();
+      searchInput?.blur();
+    }
+  });
+
+  // Open if input has content and focus
+  searchInput?.addEventListener('focus', () => {
+    if (searchInput.value.length >= 2 && resultsContent?.innerHTML !== '') {
+      showResults();
+    }
+  });
+</script>

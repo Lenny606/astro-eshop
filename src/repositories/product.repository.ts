@@ -1,7 +1,7 @@
 import { products } from '../db/schema';
 import { BaseRepository } from './base.repository';
 import { db } from '../db';
-import { eq, gte, sql } from 'drizzle-orm';
+import { eq, gte, sql, or, like } from 'drizzle-orm';
 import { logger } from '../lib/logger';
 import { DatabaseError } from '../lib/errors';
 
@@ -15,6 +15,25 @@ export class ProductRepository extends BaseRepository<typeof products> {
       return await db.select().from(this.table).where(gte(this.table.stock, 1));
     } catch (error) {
       logger.error({ error }, 'ProductRepository: findInStock failed');
+      throw new DatabaseError();
+    }
+  }
+
+  async search(query: string) {
+    try {
+      const searchTerm = `%${query}%`;
+      return await db.query.products.findMany({
+        where: or(
+          like(products.name, searchTerm),
+          like(products.description, searchTerm)
+        ),
+        with: {
+          category: true,
+        },
+        limit: 10,
+      });
+    } catch (error) {
+      logger.error({ error, query }, 'ProductRepository: search failed');
       throw new DatabaseError();
     }
   }
