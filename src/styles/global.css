@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: oklch(0.65 0.24 169.22);
+  --color-secondary: oklch(0.7 0.12 230);
+  --color-accent: oklch(0.6 0.2 300);
+  --color-surface: oklch(0.15 0.02 240);
+  --color-on-surface: oklch(0.95 0.01 240);
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+:root {
+  color-scheme: dark light;
+}
+
+body {
+  @apply bg-surface text-on-surface font-sans selection:bg-primary/30;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display font-bold;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-secondary to-accent;
+}
+
+.premium-btn {
+  @apply relative px-6 py-3 rounded-full font-bold transition-all duration-300
+         bg-linear-to-r from-primary to-secondary text-white
+         hover:scale-105 hover:shadow-lg hover:shadow-primary/25
+         active:scale-95 overflow-hidden;
+}
+
+.premium-btn::after {
+  content: '';
+  @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300;
+}
+
+.premium-btn:hover::after {
+  @apply opacity-100;
+}

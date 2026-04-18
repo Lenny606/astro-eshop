@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Astro Shop | Premium E-Commerce Experience">
+	<section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+		<!-- Mesh Gradient Background -->
+		<div class="absolute inset-0 -z-10 bg-surface">
+			<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 blur-[120px] rounded-full animate-float"></div>
+			<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-accent/20 blur-[120px] rounded-full animate-float" style="animation-delay: -3s"></div>
+		</div>
+
+		<div class="max-w-4xl px-6 text-center space-y-8">
+			<h1 class="text-6xl md:text-8xl font-black tracking-tight leading-tight">
+				Future of <span class="gradient-text">Shopping</span> starts here
+			</h1>
+			<p class="text-xl md:text-2xl text-on-surface/70 max-w-2xl mx-auto leading-relaxed">
+				Experience the fastest e-commerce platform built with modern technologies. 
+				Seamless performance, premium design, and intuitive UX.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+				<a href="/products" class="premium-btn text-lg">Shop Collection</a>
+				<a href="/about" class="px-8 py-3 rounded-full border border-white/20 hover:bg-white/5 transition-colors font-bold text-lg">Learn More</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="max-w-7xl mx-auto px-6 py-24">
+		<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+			<div>
+				<h2 class="text-4xl">Featured <span class="gradient-text">Artifacts</span></h2>
+				<p class="text-on-surface/60 mt-2">Curated selection of our finest products.</p>
+			</div>
+			<a href="/products" class="text-primary font-bold hover:underline">View all products →</a>
+		</div>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+			{[1, 2, 3].map((id) => (
+				<div id={`product-card-${id}`} class="group glass rounded-3xl overflow-hidden transition-transform duration-500 hover:-translate-y-2">
+					<div class="aspect-square bg-white/5 relative overflow-hidden">
+						<div class="absolute inset-0 bg-linear-to-b from-transparent to-black/20"></div>
+						<div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:scale-110 transition-transform duration-700">
+							<svg class="w-1/2 h-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+								<path d="M12 2L2 7L12 12L22 7L12 2Z" />
+								<path d="M2 17L12 22L22 17" />
+								<path d="M2 12L12 17L22 12" />
+							</svg>
+						</div>
+					</div>
+					<div class="p-8">
+						<div class="flex justify-between items-start mb-2">
+							<h3 class="text-2xl font-bold">Nexus Object {id}</h3>
+							<span class="text-primary font-mono font-bold">$129.00</span>
+						</div>
+						<p class="text-on-surface/50 text-sm mb-6">Quantum-state physical interface for modern workspace optimization.</p>
+						<button class="w-full py-4 rounded-2xl bg-white/5 hover:bg-primary transition-all duration-300 font-bold">
+							Add to Cart
+						</button>
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+</Layout>
+
+<script>
+	import { gsap } from 'gsap';
+
+	// Simple entry animation
+	window.addEventListener('DOMContentLoaded', () => {
+		gsap.from('h1', { 
+			y: 50, 
+			opacity: 0, 
+			duration: 1, 
+			ease: 'power4.out',
+			delay: 0.2
+		});
+		
+		gsap.from('p', { 
+			y: 30, 
+			opacity: 0, 
+			duration: 1, 
+			ease: 'power3.out',
+			delay: 0.4
+		});
+
+		gsap.from('.premium-btn, a[href="/about"]', { 
+			y: 20, 
+			opacity: 0, 
+			duration: 0.8, 
+			stagger: 0.1,
+			ease: 'back.out(1.7)',
+			delay: 0.6
+		});
+	});
+</script>

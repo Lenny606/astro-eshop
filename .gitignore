@@ -1,0 +1,29 @@
+# Astro
+node_modules/
+dist/
+.astro/
+
+# Environment variables
+.env
+.env.production
+.env.local
+
+# Build outputs
+dist/
+.vercel
+.netlify
+.output
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# System
+.DS_Store
+Thumbs.db
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
