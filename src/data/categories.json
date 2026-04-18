@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Klávesnice",
+    "slug": "klavesnice",
+    "description": "Mechanické, membránové a ergonomické klávesnice pro práci i hraní."
+  },
+  {
+    "id": 2,
+    "name": "Myši",
+    "slug": "mysi",
+    "description": "Herní a kancelářské myši s vysokou přesností senzoru."
+  },
+  {
+    "id": 3,
+    "name": "Monitory",
+    "slug": "monitory",
+    "description": "4K, herní a ultra-širokoúhlé monitory pro maximální zážitek."
+  },
+  {
+    "id": 4,
+    "name": "Sluchátka a Headsety",
+    "slug": "sluchatka-a-headsety",
+    "description": "Prostorový zvuk a krystalicky čistý mikrofon pro komunikaci."
+  },
+  {
+    "id": 5,
+    "name": "Externí disky a SSD",
+    "slug": "externi-disky-a-ssd",
+    "description": "Bezpečné a rychlé úložiště pro vaše data."
+  },
+  {
+    "id": 6,
+    "name": "Webkamery",
+    "slug": "webkamery",
+    "description": "Full HD a 4K webkamery pro profesionální streaming a hovory."
+  },
+  {
+    "id": 7,
+    "name": "USB Huby a docking stations",
+    "slug": "usb-huby-a-docking-stations",
+    "description": "Rozšiřte konektivitu svého zařízení jedním kabelem."
+  },
+  {
+    "id": 8,
+    "name": "Podložky pod myši",
+    "slug": "podlozky-pod-mysi",
+    "description": "Hladký povrch pro dokonalý skluz vaší myši."
+  },
+  {
+    "id": 9,
+    "name": "Kabely a adaptéry",
+    "slug": "kabely-a-adaptery",
+    "description": "HDMI, DisplayPort, USB-C a další nezbytná propojení."
+  },
+  {
+    "id": 10,
+    "name": "Stojany na notebooky",
+    "slug": "stojany-na-notebooky",
+    "description": "Lepší ergonomie a chlazení pro váš přenosný počítač."
+  }
+]

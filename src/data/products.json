@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "klavesnice-1",
+    "name": "Keyboard Pro 1",
+    "slug": "klavesnice-pro-1",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3957,
+    "stock": 13,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-1/800/600"
+  },
+  {
+    "id": "klavesnice-2",
+    "name": "Keyboard Pro 2",
+    "slug": "klavesnice-pro-2",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1059,
+    "stock": 26,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-2/800/600"
+  },
+  {
+    "id": "klavesnice-3",
+    "name": "Keyboard Pro 3",
+    "slug": "klavesnice-pro-3",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2703,
+    "stock": 56,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-3/800/600"
+  },
+  {
+    "id": "klavesnice-4",
+    "name": "Keyboard Pro 4",
+    "slug": "klavesnice-pro-4",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 539,
+    "stock": 91,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-4/800/600"
+  },
+  {
+    "id": "klavesnice-5",
+    "name": "Keyboard Pro 5",
+    "slug": "klavesnice-pro-5",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 799,
+    "stock": 60,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-5/800/600"
+  },
+  {
+    "id": "klavesnice-6",
+    "name": "Keyboard Pro 6",
+    "slug": "klavesnice-pro-6",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 836,
+    "stock": 90,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-6/800/600"
+  },
+  {
+    "id": "klavesnice-7",
+    "name": "Keyboard Pro 7",
+    "slug": "klavesnice-pro-7",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3670,
+    "stock": 6,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-7/800/600"
+  },
+  {
+    "id": "klavesnice-8",
+    "name": "Keyboard Pro 8",
+    "slug": "klavesnice-pro-8",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1334,
+    "stock": 55,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-8/800/600"
+  },
+  {
+    "id": "klavesnice-9",
+    "name": "Keyboard Pro 9",
+    "slug": "klavesnice-pro-9",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4380,
+    "stock": 46,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-9/800/600"
+  },
+  {
+    "id": "klavesnice-10",
+    "name": "Keyboard Pro 10",
+    "slug": "klavesnice-pro-10",
+    "description": "Špičkový produkt v kategorii Keyboard. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1112,
+    "stock": 43,
+    "categoryId": 1,
+    "image": "https://picsum.photos/seed/klavesnice-10/800/600"
+  },
+  {
+    "id": "mysi-1",
+    "name": "Mouse Pro 1",
+    "slug": "mysi-pro-1",
+    "description": "Špičkový produkt v kategorii Mouse. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3757,
+    "stock": 15,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-1/800/600"
+  },
+  {
+    "id": "mysi-2",
+    "name": "Mouse Pro 2",
+    "slug": "mysi-pro-2",
+    "description": "Špičkový produkt v kategorii Mouse. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4216,
+    "stock": 89,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-2/800/600"
+  },
+  {
+    "id": "mysi-3",
+    "name": "Mouse Pro 3",
+    "slug": "mysi-pro-3",
+    "description": "Špičkový produkt v kategorii Mouse. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 914,
+    "stock": 1,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-3/800/600"
+  },
+  {
+    "id": "mysi-4",
+    "name": "Mouse Pro 4",
+    "slug": "mysi-pro-4",
+    "description": "Špičkový produkt v kategorii Mouse. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1125,
+    "stock": 49,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-4/800/600"
+  },
+  {
+    "id": "mysi-5",
+    "name": "Mouse Pro 5",
+    "slug": "mysi-pro-5",
+    "description": "Špičkový produkt v kategorii Mouse. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1723,
+    "stock": 13,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-5/800/600"
+  },
+  {
+    "id": "mysi-6",
+    "name": "Mouse Pro 6",
+    "slug": "mysi-pro-6",
+    "description": "Špičkový produkt v kategorii Mouse. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 241,
+    "stock": 60,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-6/800/600"
+  },
+  {
+    "id": "mysi-7",
+    "name": "Mouse Pro 7",
+    "slug": "mysi-pro-7",
+    "description": "Špičkový produkt v kategorii Mouse. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4759,
+    "stock": 13,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-7/800/600"
+  },
+  {
+    "id": "mysi-8",
+    "name": "Mouse Pro 8",
+    "slug": "mysi-pro-8",
+    "description": "Špičkový produkt v kategorii Mouse. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 5007,
+    "stock": 30,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-8/800/600"
+  },
+  {
+    "id": "mysi-9",
+    "name": "Mouse Pro 9",
+    "slug": "mysi-pro-9",
+    "description": "Špičkový produkt v kategorii Mouse. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3579,
+    "stock": 2,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-9/800/600"
+  },
+  {
+    "id": "mysi-10",
+    "name": "Mouse Pro 10",
+    "slug": "mysi-pro-10",
+    "description": "Špičkový produkt v kategorii Mouse. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1642,
+    "stock": 15,
+    "categoryId": 2,
+    "image": "https://picsum.photos/seed/mysi-10/800/600"
+  },
+  {
+    "id": "monitory-1",
+    "name": "Monitor Pro 1",
+    "slug": "monitory-pro-1",
+    "description": "Špičkový produkt v kategorii Monitor. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2931,
+    "stock": 10,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-1/800/600"
+  },
+  {
+    "id": "monitory-2",
+    "name": "Monitor Pro 2",
+    "slug": "monitory-pro-2",
+    "description": "Špičkový produkt v kategorii Monitor. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4730,
+    "stock": 37,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-2/800/600"
+  },
+  {
+    "id": "monitory-3",
+    "name": "Monitor Pro 3",
+    "slug": "monitory-pro-3",
+    "description": "Špičkový produkt v kategorii Monitor. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3841,
+    "stock": 96,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-3/800/600"
+  },
+  {
+    "id": "monitory-4",
+    "name": "Monitor Pro 4",
+    "slug": "monitory-pro-4",
+    "description": "Špičkový produkt v kategorii Monitor. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4045,
+    "stock": 49,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-4/800/600"
+  },
+  {
+    "id": "monitory-5",
+    "name": "Monitor Pro 5",
+    "slug": "monitory-pro-5",
+    "description": "Špičkový produkt v kategorii Monitor. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2055,
+    "stock": 89,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-5/800/600"
+  },
+  {
+    "id": "monitory-6",
+    "name": "Monitor Pro 6",
+    "slug": "monitory-pro-6",
+    "description": "Špičkový produkt v kategorii Monitor. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4506,
+    "stock": 37,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-6/800/600"
+  },
+  {
+    "id": "monitory-7",
+    "name": "Monitor Pro 7",
+    "slug": "monitory-pro-7",
+    "description": "Špičkový produkt v kategorii Monitor. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 622,
+    "stock": 72,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-7/800/600"
+  },
+  {
+    "id": "monitory-8",
+    "name": "Monitor Pro 8",
+    "slug": "monitory-pro-8",
+    "description": "Špičkový produkt v kategorii Monitor. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3403,
+    "stock": 41,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-8/800/600"
+  },
+  {
+    "id": "monitory-9",
+    "name": "Monitor Pro 9",
+    "slug": "monitory-pro-9",
+    "description": "Špičkový produkt v kategorii Monitor. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 466,
+    "stock": 85,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-9/800/600"
+  },
+  {
+    "id": "monitory-10",
+    "name": "Monitor Pro 10",
+    "slug": "monitory-pro-10",
+    "description": "Špičkový produkt v kategorii Monitor. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1932,
+    "stock": 79,
+    "categoryId": 3,
+    "image": "https://picsum.photos/seed/monitory-10/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-1",
+    "name": "Headset Pro 1",
+    "slug": "sluchatka-a-headsety-pro-1",
+    "description": "Špičkový produkt v kategorii Headset. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3006,
+    "stock": 21,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-1/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-2",
+    "name": "Headset Pro 2",
+    "slug": "sluchatka-a-headsety-pro-2",
+    "description": "Špičkový produkt v kategorii Headset. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2702,
+    "stock": 80,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-2/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-3",
+    "name": "Headset Pro 3",
+    "slug": "sluchatka-a-headsety-pro-3",
+    "description": "Špičkový produkt v kategorii Headset. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 279,
+    "stock": 6,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-3/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-4",
+    "name": "Headset Pro 4",
+    "slug": "sluchatka-a-headsety-pro-4",
+    "description": "Špičkový produkt v kategorii Headset. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4821,
+    "stock": 10,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-4/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-5",
+    "name": "Headset Pro 5",
+    "slug": "sluchatka-a-headsety-pro-5",
+    "description": "Špičkový produkt v kategorii Headset. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1537,
+    "stock": 53,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-5/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-6",
+    "name": "Headset Pro 6",
+    "slug": "sluchatka-a-headsety-pro-6",
+    "description": "Špičkový produkt v kategorii Headset. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3937,
+    "stock": 85,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-6/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-7",
+    "name": "Headset Pro 7",
+    "slug": "sluchatka-a-headsety-pro-7",
+    "description": "Špičkový produkt v kategorii Headset. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 5024,
+    "stock": 95,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-7/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-8",
+    "name": "Headset Pro 8",
+    "slug": "sluchatka-a-headsety-pro-8",
+    "description": "Špičkový produkt v kategorii Headset. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 817,
+    "stock": 30,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-8/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-9",
+    "name": "Headset Pro 9",
+    "slug": "sluchatka-a-headsety-pro-9",
+    "description": "Špičkový produkt v kategorii Headset. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3261,
+    "stock": 87,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-9/800/600"
+  },
+  {
+    "id": "sluchatka-a-headsety-10",
+    "name": "Headset Pro 10",
+    "slug": "sluchatka-a-headsety-pro-10",
+    "description": "Špičkový produkt v kategorii Headset. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4683,
+    "stock": 49,
+    "categoryId": 4,
+    "image": "https://picsum.photos/seed/sluchatka-a-headsety-10/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-1",
+    "name": "SSD/HDD Pro 1",
+    "slug": "externi-disky-a-ssd-pro-1",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1734,
+    "stock": 59,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-1/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-2",
+    "name": "SSD/HDD Pro 2",
+    "slug": "externi-disky-a-ssd-pro-2",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2976,
+    "stock": 6,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-2/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-3",
+    "name": "SSD/HDD Pro 3",
+    "slug": "externi-disky-a-ssd-pro-3",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 476,
+    "stock": 68,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-3/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-4",
+    "name": "SSD/HDD Pro 4",
+    "slug": "externi-disky-a-ssd-pro-4",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 5145,
+    "stock": 7,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-4/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-5",
+    "name": "SSD/HDD Pro 5",
+    "slug": "externi-disky-a-ssd-pro-5",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3514,
+    "stock": 48,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-5/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-6",
+    "name": "SSD/HDD Pro 6",
+    "slug": "externi-disky-a-ssd-pro-6",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3492,
+    "stock": 34,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-6/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-7",
+    "name": "SSD/HDD Pro 7",
+    "slug": "externi-disky-a-ssd-pro-7",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1819,
+    "stock": 49,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-7/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-8",
+    "name": "SSD/HDD Pro 8",
+    "slug": "externi-disky-a-ssd-pro-8",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 918,
+    "stock": 86,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-8/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-9",
+    "name": "SSD/HDD Pro 9",
+    "slug": "externi-disky-a-ssd-pro-9",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2013,
+    "stock": 1,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-9/800/600"
+  },
+  {
+    "id": "externi-disky-a-ssd-10",
+    "name": "SSD/HDD Pro 10",
+    "slug": "externi-disky-a-ssd-pro-10",
+    "description": "Špičkový produkt v kategorii SSD/HDD. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2282,
+    "stock": 59,
+    "categoryId": 5,
+    "image": "https://picsum.photos/seed/externi-disky-a-ssd-10/800/600"
+  },
+  {
+    "id": "webkamery-1",
+    "name": "Webcam Pro 1",
+    "slug": "webkamery-pro-1",
+    "description": "Špičkový produkt v kategorii Webcam. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2379,
+    "stock": 30,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-1/800/600"
+  },
+  {
+    "id": "webkamery-2",
+    "name": "Webcam Pro 2",
+    "slug": "webkamery-pro-2",
+    "description": "Špičkový produkt v kategorii Webcam. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3975,
+    "stock": 40,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-2/800/600"
+  },
+  {
+    "id": "webkamery-3",
+    "name": "Webcam Pro 3",
+    "slug": "webkamery-pro-3",
+    "description": "Špičkový produkt v kategorii Webcam. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1794,
+    "stock": 83,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-3/800/600"
+  },
+  {
+    "id": "webkamery-4",
+    "name": "Webcam Pro 4",
+    "slug": "webkamery-pro-4",
+    "description": "Špičkový produkt v kategorii Webcam. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2968,
+    "stock": 13,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-4/800/600"
+  },
+  {
+    "id": "webkamery-5",
+    "name": "Webcam Pro 5",
+    "slug": "webkamery-pro-5",
+    "description": "Špičkový produkt v kategorii Webcam. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4715,
+    "stock": 39,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-5/800/600"
+  },
+  {
+    "id": "webkamery-6",
+    "name": "Webcam Pro 6",
+    "slug": "webkamery-pro-6",
+    "description": "Špičkový produkt v kategorii Webcam. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3740,
+    "stock": 98,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-6/800/600"
+  },
+  {
+    "id": "webkamery-7",
+    "name": "Webcam Pro 7",
+    "slug": "webkamery-pro-7",
+    "description": "Špičkový produkt v kategorii Webcam. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1034,
+    "stock": 60,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-7/800/600"
+  },
+  {
+    "id": "webkamery-8",
+    "name": "Webcam Pro 8",
+    "slug": "webkamery-pro-8",
+    "description": "Špičkový produkt v kategorii Webcam. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1325,
+    "stock": 40,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-8/800/600"
+  },
+  {
+    "id": "webkamery-9",
+    "name": "Webcam Pro 9",
+    "slug": "webkamery-pro-9",
+    "description": "Špičkový produkt v kategorii Webcam. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3081,
+    "stock": 30,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-9/800/600"
+  },
+  {
+    "id": "webkamery-10",
+    "name": "Webcam Pro 10",
+    "slug": "webkamery-pro-10",
+    "description": "Špičkový produkt v kategorii Webcam. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3033,
+    "stock": 47,
+    "categoryId": 6,
+    "image": "https://picsum.photos/seed/webkamery-10/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-1",
+    "name": "USB Hub Pro 1",
+    "slug": "usb-huby-a-docking-stations-pro-1",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3963,
+    "stock": 24,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-1/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-2",
+    "name": "USB Hub Pro 2",
+    "slug": "usb-huby-a-docking-stations-pro-2",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3139,
+    "stock": 81,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-2/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-3",
+    "name": "USB Hub Pro 3",
+    "slug": "usb-huby-a-docking-stations-pro-3",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 231,
+    "stock": 88,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-3/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-4",
+    "name": "USB Hub Pro 4",
+    "slug": "usb-huby-a-docking-stations-pro-4",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3764,
+    "stock": 14,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-4/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-5",
+    "name": "USB Hub Pro 5",
+    "slug": "usb-huby-a-docking-stations-pro-5",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1222,
+    "stock": 29,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-5/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-6",
+    "name": "USB Hub Pro 6",
+    "slug": "usb-huby-a-docking-stations-pro-6",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 494,
+    "stock": 38,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-6/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-7",
+    "name": "USB Hub Pro 7",
+    "slug": "usb-huby-a-docking-stations-pro-7",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4302,
+    "stock": 38,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-7/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-8",
+    "name": "USB Hub Pro 8",
+    "slug": "usb-huby-a-docking-stations-pro-8",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1856,
+    "stock": 12,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-8/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-9",
+    "name": "USB Hub Pro 9",
+    "slug": "usb-huby-a-docking-stations-pro-9",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1926,
+    "stock": 80,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-9/800/600"
+  },
+  {
+    "id": "usb-huby-a-docking-stations-10",
+    "name": "USB Hub Pro 10",
+    "slug": "usb-huby-a-docking-stations-pro-10",
+    "description": "Špičkový produkt v kategorii USB Hub. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3439,
+    "stock": 59,
+    "categoryId": 7,
+    "image": "https://picsum.photos/seed/usb-huby-a-docking-stations-10/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-1",
+    "name": "Mousepad Pro 1",
+    "slug": "podlozky-pod-mysi-pro-1",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2660,
+    "stock": 1,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-1/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-2",
+    "name": "Mousepad Pro 2",
+    "slug": "podlozky-pod-mysi-pro-2",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3237,
+    "stock": 30,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-2/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-3",
+    "name": "Mousepad Pro 3",
+    "slug": "podlozky-pod-mysi-pro-3",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1902,
+    "stock": 32,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-3/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-4",
+    "name": "Mousepad Pro 4",
+    "slug": "podlozky-pod-mysi-pro-4",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3447,
+    "stock": 78,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-4/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-5",
+    "name": "Mousepad Pro 5",
+    "slug": "podlozky-pod-mysi-pro-5",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2309,
+    "stock": 50,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-5/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-6",
+    "name": "Mousepad Pro 6",
+    "slug": "podlozky-pod-mysi-pro-6",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3797,
+    "stock": 77,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-6/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-7",
+    "name": "Mousepad Pro 7",
+    "slug": "podlozky-pod-mysi-pro-7",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1296,
+    "stock": 26,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-7/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-8",
+    "name": "Mousepad Pro 8",
+    "slug": "podlozky-pod-mysi-pro-8",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 514,
+    "stock": 31,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-8/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-9",
+    "name": "Mousepad Pro 9",
+    "slug": "podlozky-pod-mysi-pro-9",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 939,
+    "stock": 8,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-9/800/600"
+  },
+  {
+    "id": "podlozky-pod-mysi-10",
+    "name": "Mousepad Pro 10",
+    "slug": "podlozky-pod-mysi-pro-10",
+    "description": "Špičkový produkt v kategorii Mousepad. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2577,
+    "stock": 63,
+    "categoryId": 8,
+    "image": "https://picsum.photos/seed/podlozky-pod-mysi-10/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-1",
+    "name": "Cable Pro 1",
+    "slug": "kabely-a-adaptery-pro-1",
+    "description": "Špičkový produkt v kategorii Cable. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 245,
+    "stock": 56,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-1/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-2",
+    "name": "Cable Pro 2",
+    "slug": "kabely-a-adaptery-pro-2",
+    "description": "Špičkový produkt v kategorii Cable. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 620,
+    "stock": 81,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-2/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-3",
+    "name": "Cable Pro 3",
+    "slug": "kabely-a-adaptery-pro-3",
+    "description": "Špičkový produkt v kategorii Cable. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3875,
+    "stock": 24,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-3/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-4",
+    "name": "Cable Pro 4",
+    "slug": "kabely-a-adaptery-pro-4",
+    "description": "Špičkový produkt v kategorii Cable. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 480,
+    "stock": 0,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-4/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-5",
+    "name": "Cable Pro 5",
+    "slug": "kabely-a-adaptery-pro-5",
+    "description": "Špičkový produkt v kategorii Cable. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4392,
+    "stock": 18,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-5/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-6",
+    "name": "Cable Pro 6",
+    "slug": "kabely-a-adaptery-pro-6",
+    "description": "Špičkový produkt v kategorii Cable. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3846,
+    "stock": 26,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-6/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-7",
+    "name": "Cable Pro 7",
+    "slug": "kabely-a-adaptery-pro-7",
+    "description": "Špičkový produkt v kategorii Cable. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 4736,
+    "stock": 70,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-7/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-8",
+    "name": "Cable Pro 8",
+    "slug": "kabely-a-adaptery-pro-8",
+    "description": "Špičkový produkt v kategorii Cable. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1980,
+    "stock": 44,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-8/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-9",
+    "name": "Cable Pro 9",
+    "slug": "kabely-a-adaptery-pro-9",
+    "description": "Špičkový produkt v kategorii Cable. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2253,
+    "stock": 7,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-9/800/600"
+  },
+  {
+    "id": "kabely-a-adaptery-10",
+    "name": "Cable Pro 10",
+    "slug": "kabely-a-adaptery-pro-10",
+    "description": "Špičkový produkt v kategorii Cable. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 355,
+    "stock": 62,
+    "categoryId": 9,
+    "image": "https://picsum.photos/seed/kabely-a-adaptery-10/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-1",
+    "name": "Stand Pro 1",
+    "slug": "stojany-na-notebooky-pro-1",
+    "description": "Špičkový produkt v kategorii Stand. Model 1 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 736,
+    "stock": 20,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-1/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-2",
+    "name": "Stand Pro 2",
+    "slug": "stojany-na-notebooky-pro-2",
+    "description": "Špičkový produkt v kategorii Stand. Model 2 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2038,
+    "stock": 38,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-2/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-3",
+    "name": "Stand Pro 3",
+    "slug": "stojany-na-notebooky-pro-3",
+    "description": "Špičkový produkt v kategorii Stand. Model 3 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 752,
+    "stock": 47,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-3/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-4",
+    "name": "Stand Pro 4",
+    "slug": "stojany-na-notebooky-pro-4",
+    "description": "Špičkový produkt v kategorii Stand. Model 4 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2138,
+    "stock": 95,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-4/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-5",
+    "name": "Stand Pro 5",
+    "slug": "stojany-na-notebooky-pro-5",
+    "description": "Špičkový produkt v kategorii Stand. Model 5 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 5033,
+    "stock": 13,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-5/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-6",
+    "name": "Stand Pro 6",
+    "slug": "stojany-na-notebooky-pro-6",
+    "description": "Špičkový produkt v kategorii Stand. Model 6 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 3633,
+    "stock": 76,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-6/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-7",
+    "name": "Stand Pro 7",
+    "slug": "stojany-na-notebooky-pro-7",
+    "description": "Špičkový produkt v kategorii Stand. Model 7 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 5100,
+    "stock": 92,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-7/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-8",
+    "name": "Stand Pro 8",
+    "slug": "stojany-na-notebooky-pro-8",
+    "description": "Špičkový produkt v kategorii Stand. Model 8 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 2482,
+    "stock": 49,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-8/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-9",
+    "name": "Stand Pro 9",
+    "slug": "stojany-na-notebooky-pro-9",
+    "description": "Špičkový produkt v kategorii Stand. Model 9 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1800,
+    "stock": 8,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-9/800/600"
+  },
+  {
+    "id": "stojany-na-notebooky-10",
+    "name": "Stand Pro 10",
+    "slug": "stojany-na-notebooky-pro-10",
+    "description": "Špičkový produkt v kategorii Stand. Model 10 nabízí vynikající výkon a spolehlivost pro profesionální nasazení.",
+    "price": 1697,
+    "stock": 26,
+    "categoryId": 10,
+    "image": "https://picsum.photos/seed/stojany-na-notebooky-10/800/600"
+  }
+]
