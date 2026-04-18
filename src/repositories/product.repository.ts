@@ -36,6 +36,34 @@ export class ProductRepository extends BaseRepository<typeof products> {
       throw new DatabaseError(error instanceof Error ? error.message : 'Stock update failed');
     }
   }
+
+  async findBySlug(slug: string) {
+    try {
+      return await db.query.products.findFirst({
+        where: eq(products.slug, slug),
+        with: {
+          category: true,
+        },
+      });
+    } catch (error) {
+      logger.error({ error, slug }, 'ProductRepository: findBySlug failed');
+      throw new DatabaseError();
+    }
+  }
+
+  async findByCategory(categoryId: number) {
+    try {
+      return await db.query.products.findMany({
+        where: eq(products.categoryId, categoryId),
+        with: {
+          category: true,
+        },
+      });
+    } catch (error) {
+      logger.error({ error, categoryId }, 'ProductRepository: findByCategory failed');
+      throw new DatabaseError();
+    }
+  }
 }
 
 export const productRepository = new ProductRepository();

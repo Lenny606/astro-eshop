@@ -5,6 +5,6 @@ if (!import.meta.env.STRIPE_SECRET_KEY) {
 }
 
 export const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY ?? '', {
-  apiVersion: '2025-01-27-ac', // Use latest or pinned version
+  apiVersion: '2025-02-24.acacia', // Corrected to latest supported version
   typescript: true,
 });

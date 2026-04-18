@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/shop/ProductCard.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { categoryRepository } from '../../repositories/category.repository';
+import { productRepository } from '../../repositories/product.repository';
+import type { Category, ProductWithCategory } from '../../types';
+
+export async function getStaticPaths() {
+  const categories = await categoryRepository.findAll();
+  return categories.map((cat: any) => ({
+    params: { slug: cat.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const category = await categoryRepository.findBySlug(slug!) as (Category & { subcategories: Category[], parent: Category | null });
+
+if (!category) {
+  return Astro.redirect('/404');
+}
+
+const products = await productRepository.findByCategory(category.id) as ProductWithCategory[];
+---
+
+<Layout title={`${category.name} | Astro Shop`} description={category.description || ''}>
+  <div class="container mx-auto px-4 py-20">
+    {/* Breadcrumbs */}
+    <nav class="flex mb-12 text-sm text-on-surface/40 uppercase tracking-widest font-bold" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2">
+        <li><a href="/" class="hover:text-primary transition-colors">Domů</a></li>
+        <li><span class="mx-2">/</span></li>
+        {category.parent && (
+          <>
+            <li><a href={`/category/${category.parent.slug}`} class="hover:text-primary transition-colors">{category.parent.name}</a></li>
+            <li><span class="mx-2">/</span></li>
+          </>
+        )}
+        <li class="text-primary">{category.name}</li>
+      </ol>
+    </nav>
+
+    {/* Header */}
+    <header class="mb-16">
+      <h1 class="text-6xl font-black mb-6 gradient-text">
+        {category.name}
+      </h1>
+      {category.description && (
+        <p class="text-xl text-on-surface/60 max-w-3xl leading-relaxed">
+          {category.description}
+        </p>
+      )}
+    </header>
+
+    {/* Subcategories */}
+    {category.subcategories && category.subcategories.length > 0 && (
+      <section class="mb-20">
+        <h2 class="text-xs uppercase tracking-[0.3em] font-bold text-on-surface/40 mb-6">Podkategorie</h2>
+        <div class="flex flex-wrap gap-4">
+          {category.subcategories.map(sub => (
+            <a href={`/category/${sub.slug}`} class="group">
+              <Badge variant="glass" class="px-6 py-3 text-sm group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300">
+                {sub.name}
+                <span class="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 inline-block">→</span>
+              </Badge>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* Products Listing */}
+    <section>
+      <div class="flex items-baseline justify-between mb-10 border-b border-white/5 pb-6">
+        <h2 class="text-2xl font-bold">Produkty</h2>
+        <span class="text-sm font-medium text-on-surface/40">{products.length} položek</span>
+      </div>
+
+      {products.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map(product => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      ) : (
+        <div class="py-20 text-center glass rounded-3xl border border-dashed border-white/10">
+          <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-3xl">📭</div>
+          <h3 class="text-xl font-bold mb-2">V této kategorii zatím nic není</h3>
+          <p class="text-on-surface/40">Zkuste se vrátit později nebo prozkoumejte jiné kategorie.</p>
+          <a href="/categories" class="inline-block mt-8 text-primary font-bold hover:underline">Zobrazit všechny kategorie</a>
+        </div>
+      )}
+    </section>
+  </div>
+</Layout>
