@@ -4,10 +4,6 @@ import ProductCard from '../components/shop/ProductCard.astro';
 import { productRepository } from '../repositories/product.repository';
 import type { ProductWithCategory } from '../types';
 
-const products = await productRepository.findAll() as ProductWithCategory[];
-// Note: In a real app, I'd fetch categories separately to join them if findAll doesn't do it, 
-// but my ProductRepository.findAll inherits from BaseRepository which uses select().from(this.table).
-// I should probably use db.query here to get categories too.
 import { db } from '../db';
 const allProducts = await db.query.products.findMany({
     with: {

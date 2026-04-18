@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CategoryCard from '../components/shop/CategoryCard.astro';
+import ProductCard from '../components/shop/ProductCard.astro';
+import { categoryRepository } from '../repositories/category.repository';
+import { productRepository } from '../repositories/product.repository';
+import type { Category, ProductWithCategory } from '../types';
+
+const categories = await categoryRepository.findAll() as Category[];
+const randomProducts = await productRepository.getRandom(6) as ProductWithCategory[];
 ---
 
 <Layout title="Astro Shop | Premium E-Commerce Experience">
@@ -20,44 +28,41 @@ import Layout from '../layouts/Layout.astro';
 			</p>
 			<div class="flex flex-col sm:flex-row gap-4 justify-center pt-8">
 				<a href="/products" class="premium-btn text-lg">Shop Collection</a>
-				<a href="/about" class="px-8 py-3 rounded-full border border-white/20 hover:bg-white/5 transition-colors font-bold text-lg">Learn More</a>
+				<a href="/categories" class="px-8 py-3 rounded-full border border-white/20 hover:bg-white/5 transition-colors font-bold text-lg">Browse Categories</a>
 			</div>
 		</div>
 	</section>
 
-	<section class="max-w-7xl mx-auto px-6 py-24">
+	{/* Category Section */}
+	<section class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
 		<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
 			<div>
-				<h2 class="text-4xl">Featured <span class="gradient-text">Artifacts</span></h2>
-				<p class="text-on-surface/60 mt-2">Curated selection of our finest products.</p>
+				<h2 class="text-4xl font-bold uppercase tracking-tighter">Top <span class="gradient-text">Kategorie</span></h2>
+				<p class="text-on-surface/60 mt-2">Objevte naše hlavní produktové řady.</p>
 			</div>
-			<a href="/products" class="text-primary font-bold hover:underline">View all products →</a>
+			<a href="/categories" class="text-primary font-bold hover:underline uppercase tracking-widest text-sm">Všechny kategorie →</a>
 		</div>
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-			{[1, 2, 3].map((id) => (
-				<div id={`product-card-${id}`} class="group glass rounded-3xl overflow-hidden transition-transform duration-500 hover:-translate-y-2">
-					<div class="aspect-square bg-white/5 relative overflow-hidden">
-						<div class="absolute inset-0 bg-linear-to-b from-transparent to-black/20"></div>
-						<div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:scale-110 transition-transform duration-700">
-							<svg class="w-1/2 h-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-								<path d="M12 2L2 7L12 12L22 7L12 2Z" />
-								<path d="M2 17L12 22L22 17" />
-								<path d="M2 12L12 17L22 12" />
-							</svg>
-						</div>
-					</div>
-					<div class="p-8">
-						<div class="flex justify-between items-start mb-2">
-							<h3 class="text-2xl font-bold">Nexus Object {id}</h3>
-							<span class="text-primary font-mono font-bold">$129.00</span>
-						</div>
-						<p class="text-on-surface/50 text-sm mb-6">Quantum-state physical interface for modern workspace optimization.</p>
-						<button class="w-full py-4 rounded-2xl bg-white/5 hover:bg-primary transition-all duration-300 font-bold">
-							Add to Cart
-						</button>
-					</div>
-				</div>
+			{categories.slice(0, 3).map(category => (
+				<CategoryCard category={category} />
+			))}
+		</div>
+	</section>
+
+	{/* Random Products Section */}
+	<section class="max-w-7xl mx-auto px-6 py-24 bg-white/2 rounded-[4rem] border border-white/5">
+		<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+			<div>
+				<h2 class="text-4xl font-bold uppercase tracking-tighter">Vybráno <span class="gradient-text">pro vás</span></h2>
+				<p class="text-on-surface/60 mt-2">Náhodný výběr z naší prémiové kolekce.</p>
+			</div>
+			<a href="/products" class="text-primary font-bold hover:underline uppercase tracking-widest text-sm">Zobrazit vše →</a>
+		</div>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+			{randomProducts.map(product => (
+				<ProductCard product={product} />
 			))}
 		</div>
 	</section>
