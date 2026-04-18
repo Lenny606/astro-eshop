@@ -38,6 +38,11 @@ export const orders = sqliteTable('orders', {
   id: text('id').primaryKey(),
   userId: text('user_id').references(() => users.id), // Link to user if logged in
   customerEmail: text('customer_email').notNull(),
+  shippingName: text('shipping_name').notNull().default(''),
+  shippingStreet: text('shipping_street').notNull().default(''),
+  shippingCity: text('shipping_city').notNull().default(''),
+  shippingPsc: text('shipping_psc').notNull().default(''),
+  paymentMethod: text('payment_method').notNull().default('karta'), // karta, prevod
   total: real('total').notNull(),
   status: text('status').notNull().default('pending'), // pending, paid, shipped, cancelled
   stripeSessionId: text('stripe_session_id'),

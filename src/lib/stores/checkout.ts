@@ -1,6 +1,7 @@
 import { persistentAtom } from '@nanostores/persistent';
 
 export interface CheckoutData {
+  email: string;
   name: string;
   street: string;
   city: string;
@@ -9,6 +10,7 @@ export interface CheckoutData {
 }
 
 export const checkoutStore = persistentAtom<CheckoutData>('checkout', {
+  email: '',
   name: '',
   street: '',
   city: '',
@@ -29,6 +31,7 @@ export const updateCheckoutField = (key: keyof CheckoutData, value: string) => {
 
 export const clearCheckout = () => {
   checkoutStore.set({
+    email: '',
     name: '',
     street: '',
     city: '',
