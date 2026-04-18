@@ -26,7 +26,7 @@ export const products = sqliteTable('products', {
   name: text('name').notNull(),
   slug: text('slug').notNull().unique(),
   description: text('description').notNull(),
-  price: real('price').notNull(),
+  price: integer('price').notNull(),
   stock: integer('stock').notNull().default(0),
   image: text('image'),
   categoryId: integer('category_id').references(() => categories.id),
@@ -43,7 +43,7 @@ export const orders = sqliteTable('orders', {
   shippingCity: text('shipping_city').notNull().default(''),
   shippingPsc: text('shipping_psc').notNull().default(''),
   paymentMethod: text('payment_method').notNull().default('karta'), // karta, prevod
-  total: real('total').notNull(),
+  total: integer('total').notNull(),
   status: text('status').notNull().default('pending'), // pending, paid, shipped, cancelled
   stripeSessionId: text('stripe_session_id'),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(new Date()),
@@ -55,7 +55,7 @@ export const orderItems = sqliteTable('order_items', {
   orderId: text('order_id').notNull().references(() => orders.id),
   productId: text('product_id').notNull().references(() => products.id),
   quantity: integer('quantity').notNull(),
-  priceAtPurchase: real('price_at_purchase').notNull(),
+  priceAtPurchase: integer('price_at_purchase').notNull(),
 });
 
 // --- SETTINGS ---

@@ -8,10 +8,11 @@ interface Props {
 
 const { amount, currency = 'CZK', locale = 'cs-CZ', class: className } = Astro.props;
 
+// Amount is stored in minor units (e.g. cents/haléře)
 const formattedPrice = new Intl.NumberFormat(locale, {
   style: 'currency',
   currency: currency,
-}).format(amount);
+}).format(amount / 100);
 ---
 
 <span class:list={['font-mono font-bold tracking-tighter', className]}>

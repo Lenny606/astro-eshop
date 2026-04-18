@@ -36,7 +36,8 @@ export const server = {
                   description: product.description,
                   images: product.image ? [product.image] : [],
                 },
-                unit_amount: Math.round(product.price * 100),
+                // product.price is now in minor units (cents)
+                unit_amount: product.price,
               },
               quantity: quantity,
             },
@@ -58,7 +59,7 @@ export const server = {
     input: z.object({
       items: z.array(z.object({
         id: z.string(),
-        quantity: z.number(),
+        quantity: z.number().min(1),
       })),
       customer: z.object({
         email: z.string().email(),
@@ -85,7 +86,7 @@ export const server = {
           return {
             productId: item.id,
             quantity: item.quantity,
-            price: product.price,
+            price: product.price, // already in minor units
           };
         });
 

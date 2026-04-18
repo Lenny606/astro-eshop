@@ -306,7 +306,7 @@ import Price from '../components/ui/Price.astro';
         <img src="${item.image || ''}" class="w-20 h-20 object-cover rounded-lg" />
         <div class="flex-grow">
           <h4 class="font-bold">${item.name}</h4>
-          <span class="text-sm text-on-surface/60">${item.price} Kč / ks</span>
+          <span class="text-sm text-on-surface/60">${item.price / 100} Kč / ks</span>
         </div>
         <div class="flex items-center gap-3 bg-white/5 rounded-lg border border-white/5 p-1">
           <button class="w-8 h-8 hover:bg-white/5 rounded-md decrease-qty" data-id="${item.id}">-</button>
@@ -314,7 +314,7 @@ import Price from '../components/ui/Price.astro';
           <button class="w-8 h-8 hover:bg-white/5 rounded-md increase-qty" data-id="${item.id}">+</button>
         </div>
         <div class="text-right min-w-[80px]">
-          <div class="font-bold">${item.price * item.quantity} Kč</div>
+          <div class="font-bold">${(item.price * item.quantity) / 100} Kč</div>
           <button class="text-xs text-red-400 hover:text-red-300 remove-item" data-id="${item.id}">Odstranit</button>
         </div>
       </div>
@@ -338,8 +338,8 @@ import Price from '../components/ui/Price.astro';
     const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const subtotalEl = document.getElementById('subtotal-price');
     const totalEl = document.getElementById('total-price');
-    if (subtotalEl) subtotalEl.textContent = `${total} Kč`;
-    if (totalEl) totalEl.textContent = `${total} Kč`;
+    if (subtotalEl) subtotalEl.textContent = `${total / 100} Kč`;
+    if (totalEl) totalEl.textContent = `${total / 100} Kč`;
   }
 
   // Sledování změn ve formuláři (Krok 2)
@@ -432,14 +432,14 @@ import Price from '../components/ui/Price.astro';
       itemsReview.innerHTML = items.map(item => `
         <div class="flex justify-between text-sm">
           <span>${item.name} <span class="text-on-surface/40">x ${item.quantity}</span></span>
-          <span>${item.price * item.quantity} Kč</span>
+          <span>${(item.price * item.quantity) / 100} Kč</span>
         </div>
       `).join('');
     }
 
     const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const totalReview = document.getElementById('review-total');
-    if (totalReview) totalReview.textContent = `${total} Kč`;
+    if (totalReview) totalReview.textContent = `${total / 100} Kč`;
   }
 
   // Finální odeslání
