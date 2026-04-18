@@ -91,10 +91,10 @@ const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 group-hover:rotate-180 transition-transform duration-300"><path d="m6 9 6 6 6-6"/></svg>
 						</a>
 						<div class="absolute top-full left-0 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-							<div class="glass min-w-[240px] p-2 rounded-xl border border-white/10 shadow-2xl backdrop-blur-xl">
+							<div class="glass bg-white/10 min-w-[240px] p-2 rounded-xl border border-white/10 shadow-2xl backdrop-blur-xl">
 								<div class="grid grid-cols-1 gap-1">
 									{mainCategories.map((category: Category) => (
-										<a href={`/categories/${category.slug}`} class="px-4 py-2.5 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium whitespace-nowrap">
+										<a href={`/category/${category.slug}`} class="px-4 py-2.5 rounded-lg hover:bg-white/20 transition-colors text-sm font-medium whitespace-nowrap">
 											{category.name}
 										</a>
 									))}
