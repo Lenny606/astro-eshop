@@ -65,13 +65,42 @@ export const settings = sqliteTable('settings', {
   description: text('description'),
 });
 
+// --- SHIPPING METHODS ---
+export const shippingMethods = sqliteTable('shipping_methods', {
+  id: text('id').primaryKey(), // UUID/ULID
+  name: text('name').notNull(),
+  price: integer('price').notNull(),
+  description: text('description'),
+  active: integer('active', { mode: 'boolean' }).notNull().default(true),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(new Date()),
+});
+
+// --- PAYMENT METHODS ---
+export const paymentMethods = sqliteTable('payment_methods', {
+  id: text('id').primaryKey(), // UUID/ULID
+  name: text('name').notNull(),
+  price: integer('price').notNull().default(0),
+  description: text('description'),
+  active: integer('active', { mode: 'boolean' }).notNull().default(true),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(new Date()),
+});
+
 // --- RELATIONS ---
+
+export const shippingMethodsRelations = relations(shippingMethods, ({ many }) => ({
+  orders: many(orders),
+}));
+
+export const paymentMethodsRelations = relations(paymentMethods, ({ many }) => ({
+  orders: many(orders),
+}));
 
 export const usersRelations = relations(users, ({ many }) => ({
   orders: many(orders),
 }));
 
 export const categoriesRelations = relations(categories, ({ one, many }) => ({
+
   parent: one(categories, {
     fields: [categories.parentId],
     references: [categories.id],
