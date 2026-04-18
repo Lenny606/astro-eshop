@@ -89,7 +89,7 @@ const randomProducts = await productRepository.getRandom(6) as ProductWithCatego
 			delay: 0.4
 		});
 
-		gsap.from('.premium-btn, a[href="/about"]', { 
+		gsap.from('main .premium-btn, a[href="/about"]', { 
 			y: 20, 
 			opacity: 0, 
 			duration: 0.8, 

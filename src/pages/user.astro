@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Můj účet | Astro Shop" description="Správa vašeho uživatelského účtu a historie objednávek.">
+  <main class="max-w-7xl mx-auto px-6 py-24">
+    {/* Page Header */}
+    <header class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 animate-slide-up">
+      <div>
+        <h1 class="text-6xl font-black gradient-text uppercase tracking-tighter mb-4">Můj účet</h1>
+        <p class="text-on-surface/60 text-xl max-w-2xl">
+          Vítejte zpět, <span class="text-on-surface font-bold">Jan Novák</span>. Zde naleznete přehled vašich aktivit a nastavení.
+        </p>
+      </div>
+      <div class="flex gap-4">
+        <button class="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-sm">
+          Upravit profil
+        </button>
+        <button class="px-6 py-3 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-colors font-bold text-sm">
+          Odhlásit se
+        </button>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      {/* Sidebar: User Info */}
+      <div class="lg:col-span-1 space-y-8">
+        <section class="glass p-8 rounded-[2.5rem] relative overflow-hidden group">
+          <div class="absolute -top-12 -right-12 w-48 h-48 bg-primary/10 blur-[60px] rounded-full group-hover:bg-primary/20 transition-all duration-700"></div>
+          
+          <div class="flex items-center gap-6 mb-8">
+            <div class="w-20 h-20 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center text-3xl font-black text-white shadow-xl">
+              JN
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold">Jan Novák</h3>
+              <p class="text-on-surface/50 text-sm italic">Zákazníkem od 2024</p>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="space-y-1">
+              <label class="text-[10px] uppercase tracking-[0.2em] font-black text-on-surface/30">E-mail</label>
+              <p class="font-medium">jan.novak@example.com</p>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] uppercase tracking-[0.2em] font-black text-on-surface/30">Telefon</label>
+              <p class="font-medium">+420 777 123 456</p>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] uppercase tracking-[0.2em] font-black text-on-surface/30">Adresa doručení</label>
+              <p class="font-medium">Václavské náměstí 1, 110 00 Praha 1</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="glass p-8 rounded-[2.5rem] border border-primary/10">
+          <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 7l10 6 10-6"/><path d="M2 17l10-6 10 6"/></svg>
+            Věrnostní body
+          </h3>
+          <div class="flex items-end justify-between">
+            <div class="text-4xl font-black gradient-text">1 250</div>
+            <a href="#" class="text-xs font-bold text-primary hover:underline">Jak uplatnit body?</a>
+          </div>
+          <div class="mt-4 h-2 bg-white/5 rounded-full overflow-hidden">
+            <div class="h-full bg-linear-to-r from-primary to-secondary w-[65%]"></div>
+          </div>
+          <p class="text-[10px] text-on-surface/30 mt-2 text-center uppercase tracking-widest italic">Chybí vám 750 bodů k další slevě</p>
+        </section>
+      </div>
+
+      {/* Main: Order History */}
+      <div class="lg:col-span-2 space-y-8">
+        <section class="glass p-8 rounded-[3rem] border border-white/5 min-h-[600px]">
+          <div class="flex items-center justify-between mb-12">
+            <h2 class="text-3xl font-bold uppercase tracking-tighter">Historie <span class="gradient-text">objednávek</span></h2>
+            <div class="flex gap-2">
+              <span class="px-3 py-1 rounded-full bg-white/5 text-[10px] font-bold border border-white/5">FILTROVAT</span>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div class="p-6 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 transition-all duration-300 group">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-40 group-hover:text-primary group-hover:opacity-100 transition-all"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-bold">Objednávka #ORD-2024-00{i}</h4>
+                      <p class="text-xs text-on-surface/40">1{i}. března 2024 • 2 položky</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-6">
+                    <div class="text-right">
+                      <p class="font-bold text-lg">{i * 2490 + 500} Kč</p>
+                      <span class={`text-[10px] font-black uppercase tracking-widest ${i === 1 ? 'text-green-400' : 'text-on-surface/30'}`}>
+                        {i === 1 ? 'Doručeno' : 'Vyřízeno'}
+                      </span>
+                    </div>
+                    <button class="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-40"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-12 text-center">
+            <button class="text-sm font-bold text-on-surface/30 hover:text-primary transition-colors italic">
+              Zobrazit starší objednávky...
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import { gsap } from 'gsap';
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // Entrance animations
+    const tl = gsap.timeline();
+
+    tl.from('header', { 
+      y: 30, 
+      opacity: 0, 
+      duration: 1, 
+      ease: 'power4.out',
+      delay: 0.2
+    })
+    .from('.glass', {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: 'power3.out'
+    }, "-=0.6");
+    
+    // Hover effects for order items
+    const orderItems = document.querySelectorAll('.group');
+    orderItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item, { scale: 1.01, duration: 0.3, ease: 'power2.out' });
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+  });
+</script>
