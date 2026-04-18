@@ -27,11 +27,11 @@ export class OrderRepository extends BaseRepository<typeof orders> {
 
   async createOrder(data: CreateOrderData) {
     try {
-      return await db.transaction(async (tx) => {
+      return db.transaction((tx) => {
         const orderId = crypto.randomUUID();
 
         // 1. Create order header
-        await tx.insert(orders).values({
+        tx.insert(orders).values({
           id: orderId,
           customerEmail: data.customerEmail,
           shippingName: data.shippingName,
@@ -42,7 +42,7 @@ export class OrderRepository extends BaseRepository<typeof orders> {
           total: data.total,
           status: 'pending',
           createdAt: new Date(),
-        });
+        }).run();
 
         // 2. Create order items
         const itemsToInsert = data.items.map(item => ({
@@ -52,24 +52,25 @@ export class OrderRepository extends BaseRepository<typeof orders> {
           priceAtPurchase: item.price,
         }));
 
-        await tx.insert(orderItems).values(itemsToInsert);
+        tx.insert(orderItems).values(itemsToInsert).run();
 
         // 3. Update stock 
         for (const item of data.items) {
-          const product = await tx.query.products.findFirst({
-            where: (p, { eq }) => eq(p.id, item.productId)
-          });
+          const product = tx.select().from(products)
+            .where(eq(products.id, item.productId))
+            .get();
 
           if (product) {
             const newStock = product.stock - item.quantity;
             if (newStock < 0) {
               tx.rollback();
-              throw new Error(`Insufficient stock for product: ${product.name}`);
+              throw new Error(`Nedostatečné zásoby pro produkt: ${product.name}`);
             }
-            // Update stock
-            await tx.update(products)
+            
+            tx.update(products)
               .set({ stock: newStock })
-              .where(eq(products.id, item.productId));
+              .where(eq(products.id, item.productId))
+              .run();
           }
         }
 

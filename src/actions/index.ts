@@ -106,12 +106,16 @@ export const server = {
         // Simulační zpoždění pro lepší UX
         await new Promise(resolve => setTimeout(resolve, 1000));
 
+        logger.info({ orderId }, 'Action: simulateOrder success - returning to client');
         return { 
           success: true, 
           orderId 
         };
       } catch (error) {
-        logger.error({ error, customer }, 'Action: simulateOrder failed');
+        logger.error({ 
+          error: error instanceof Error ? { message: error.message, stack: error.stack } : error, 
+          customer 
+        }, 'Action: simulateOrder failed');
         throw new Error(error instanceof Error ? error.message : 'Objednávku se nepodařilo zpracovat.');
       }
     },
