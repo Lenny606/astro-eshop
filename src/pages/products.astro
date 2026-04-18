@@ -15,8 +15,8 @@ const allProducts = await db.query.products.findMany({
 <Layout title="Produkty | Astro Shop" description="Kompletní nabídka našich prémiových produktů.">
   <main class="container mx-auto px-4 py-32" data-products={JSON.stringify(allProducts)}>
     <header class="mb-16">
-      <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-8 border-b border-white/5 pb-12">
-        <div>
+      <div class="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 mb-8 border-b border-white/5 pb-12 text-center md:text-left">
+        <div class="flex flex-col items-center md:items-start">
           <h1 class="text-6xl font-black gradient-text uppercase tracking-tighter mb-2">
             Všechny Produkty
           </h1>
