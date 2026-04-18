@@ -17,6 +17,7 @@
         "test:e2e": "playwright test"
     },
     "dependencies": {
+        "@astrojs/node": "^10.0.5",
         "@tailwindcss/vite": "^4.2.2",
         "@vudovn/ag-kit": "^2.0.2",
         "astro": "^6.1.8",
