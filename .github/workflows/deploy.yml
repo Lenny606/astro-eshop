@@ -1,0 +1,65 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - prod 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Generate .env file
+        run: |
+          echo "PUBLIC_SITE_URL=${{ secrets.PUBLIC_SITE_URL }}" >> .env
+          echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> .env
+          echo "PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.PUBLIC_STRIPE_PUBLISHABLE_KEY }}" >> .env
+          echo "CMS_TOKEN=${{ secrets.CMS_TOKEN }}" >> .env
+          # SQLite DB path (relativní k dist na serveru)
+          echo "DATABASE_URL=./sqlite.db" >> .env
+
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          # TARGET PATH PONECHÁN PRÁZDNÝ DLE ZADÁNÍ
+          target: "" 
+          source: "dist/*,package.json,package-lock.json,drizzle/*,.env"
+
+      - name: Post-deploy commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            # Přejít do složky projektu (uživatel musí doplnit v SSH volání nebo nastavit v CD)
+            # cd /cesta/k/projektu 
+
+            # Instalace pouze produkčních závislostí
+            npm install --production
+
+            # Spuštění migrací (pokud jsou nové změny v schématu)
+            npx drizzle-kit push
+
+            # Restart aplikace v PM2
+            # Pokud aplikace v PM2 ještě neběží, použij: pm2 start dist/server/entry.mjs --name "astro-eshop"
+            pm2 restart "astro-eshop" || pm2 start dist/server/entry.mjs --name "astro-eshop"
