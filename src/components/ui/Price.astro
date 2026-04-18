@@ -1,0 +1,19 @@
+---
+interface Props {
+  amount: number;
+  currency?: string;
+  locale?: string;
+  class?: string;
+}
+
+const { amount, currency = 'CZK', locale = 'cs-CZ', class: className } = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat(locale, {
+  style: 'currency',
+  currency: currency,
+}).format(amount);
+---
+
+<span class:list={['font-mono font-bold tracking-tighter', className]}>
+  {formattedPrice}
+</span>

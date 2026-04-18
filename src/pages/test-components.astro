@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/shop/ProductCard.astro';
+import CategoryCard from '../components/shop/CategoryCard.astro';
+import productsDataRaw from '../data/products.json';
+import categoriesDataRaw from '../data/categories.json';
+import type { Category, Product } from '../types';
+
+const categoriesData = categoriesDataRaw as Category[];
+const productsData = productsDataRaw as Product[];
+
+const sampleCategories = categoriesData.slice(0, 3);
+const sampleProducts = productsData.slice(0, 6).map(p => ({
+    ...p,
+    category: categoriesData.find(c => c.id === p.categoryId)
+}));
+---
+
+<Layout title="Test Component Showcase">
+  <main class="container mx-auto px-4 py-20">
+    <section class="mb-20 text-center">
+      <h1 class="text-5xl font-bold mb-4 gradient-text">Component Showcase</h1>
+      <p class="text-on-surface/60 max-w-2xl mx-auto">
+        Review of the reusable components created for Products and Categories.
+      </p>
+    </section>
+
+    {/* Categories Section */}
+    <section class="mb-20">
+      <h2 class="text-3xl font-bold mb-8">Category Cards</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {sampleCategories.map(category => (
+          <CategoryCard category={category} />
+        ))}
+      </div>
+    </section>
+
+    {/* Products Section */}
+    <section>
+      <h2 class="text-3xl font-bold mb-8">Product Cards</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sampleProducts.map(product => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

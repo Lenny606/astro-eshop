@@ -1,7 +1,7 @@
 import { products } from '../db/schema';
 import { BaseRepository } from './base.repository';
 import { db } from '../db';
-import { eq, and, gte } from 'drizzle-orm';
+import { eq, gte } from 'drizzle-orm';
 import { logger } from '../lib/logger';
 import { DatabaseError } from '../lib/errors';
 

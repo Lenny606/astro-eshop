@@ -1,0 +1,77 @@
+---
+import type { ProductWithCategory } from '../../types';
+import Price from '../ui/Price.astro';
+import Badge from '../ui/Badge.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  product: ProductWithCategory;
+  class?: string;
+}
+
+const { product, class: className } = Astro.props;
+const { name, price, stock, image, slug, category } = product;
+
+const isOutOfStock = stock <= 0;
+---
+
+<article 
+  class:list={[
+    'group relative flex flex-col overflow-hidden rounded-2xl glass transition-all duration-500 hover:-translate-y-2 hover:shadow-primary/10',
+    className
+  ]}
+>
+  {/* Product Image */}
+  <div class="aspect-square overflow-hidden relative">
+    <img 
+      src={image || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop'} 
+      alt={name}
+      class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+    />
+    
+    {/* Stock Overlay */}
+    {isOutOfStock && (
+      <div class="absolute inset-0 z-10 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <Badge variant="outline" class="uppercase tracking-widest px-4 py-1">Vyprodáno</Badge>
+      </div>
+    )}
+
+    {/* Category Badge */}
+    {category && (
+      <div class="absolute top-4 left-4 z-20">
+        <Badge variant="glass">{category.name}</Badge>
+      </div>
+    )}
+
+    {/* Quick Action Overlay */}
+    <div class="absolute inset-0 z-20 flex items-end justify-center p-6 opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+      <Button variant="primary" class="w-full shadow-2xl" disabled={isOutOfStock}>
+        {isOutOfStock ? 'Nedostupné' : 'Přidat do košíku'}
+      </Button>
+    </div>
+  </div>
+
+  {/* Content */}
+  <div class="flex flex-1 flex-col p-6 items-center text-center relative">
+    {/* Subtle Glow Background */}
+    <div class="absolute inset-0 -z-10 bg-linear-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+    <h3 class="text-xl font-bold mb-1 group-hover:text-primary transition-colors duration-300">
+      <a href={`/product/${slug}`}>
+        <span aria-hidden="true" class="absolute inset-0 z-10"></span>
+        {name}
+      </a>
+    </h3>
+    
+    <Price amount={price} class="text-2xl font-display tracking-tight text-on-surface" />
+    
+    <p class="mt-3 line-clamp-2 text-sm text-on-surface/60 leading-relaxed max-w-[240px]">
+      {product.description}
+    </p>
+
+    <div class="mt-6 flex items-center justify-center gap-2 text-[10px] text-on-surface/40 font-bold uppercase tracking-[0.2em]">
+      <span class:list={['h-1.5 w-1.5 rounded-full shadow-[0_0_8px] shadow-current', isOutOfStock ? 'text-red-500 bg-red-500' : 'text-primary bg-primary']} />
+      {isOutOfStock ? 'Není skladem' : `Skladem: ${stock} ks`}
+    </div>
+  </div>
+</article>
