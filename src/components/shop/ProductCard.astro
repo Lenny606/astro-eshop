@@ -58,6 +58,7 @@ const isOutOfStock = stock <= 0;
 
   <script>
     import { addItem } from '../../lib/stores/cart';
+    import { trackAddToCart } from '../../lib/tracking';
     
     const buttons = document.querySelectorAll('.add-to-cart-btn');
     
@@ -70,6 +71,7 @@ const isOutOfStock = stock <= 0;
         if (productData) {
           const product = JSON.parse(productData);
           addItem(product);
+          trackAddToCart(product, 1);
           
           // Volitelná zpětná vazba (např. změna textu nebo animace)
           const originalText = button.textContent;

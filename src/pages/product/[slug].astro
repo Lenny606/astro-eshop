@@ -25,7 +25,7 @@ const isOutOfStock = stock <= 0;
 ---
 
 <Layout title={`${name} | Premium Shop`} description={description}>
-  <div class="container mx-auto px-4 py-32">
+  <div class="container mx-auto px-4 py-32" data-product={JSON.stringify(product)}>
     {/* Breadcrumbs */}
     <nav class="flex mb-8 text-sm text-on-surface/40 uppercase tracking-widest font-bold" aria-label="Breadcrumb">
       <ol class="flex items-center space-x-2">
@@ -112,7 +112,7 @@ const isOutOfStock = stock <= 0;
             <button class="w-12 h-12 flex items-center justify-center hover:text-primary transition-colors font-bold text-xl" id="qty-plus">+</button>
           </div>
 
-          <Button variant="primary" size="lg" class="flex-grow md:flex-initial px-10 shadow-[0_20px_40px_-15px_rgba(var(--color-primary),0.3)]" disabled={isOutOfStock}>
+          <Button variant="primary" size="lg" class="flex-grow md:flex-initial px-10 shadow-[0_20px_40px_-15px_rgba(var(--color-primary),0.3)] add-to-cart-btn" disabled={isOutOfStock}>
             {isOutOfStock ? 'Nedostupné' : 'Přidat do košíku'}
           </Button>
         </div>
@@ -134,9 +134,21 @@ const isOutOfStock = stock <= 0;
 </Layout>
 
 <script>
+  import { trackViewItem, trackAddToCart } from '../../lib/tracking';
+  import { addItem } from '../../lib/stores/cart';
+
   const minusBtn = document.getElementById('qty-minus');
   const plusBtn = document.getElementById('qty-plus');
   const input = document.getElementById('qty-input') as HTMLInputElement;
+  const addToCartBtn = document.querySelector('.add-to-cart-btn');
+  const container = document.querySelector('[data-product]');
+  
+  const product = container ? JSON.parse(container.getAttribute('data-product')!) : null;
+
+  // Track view
+  if (product) {
+    trackViewItem(product);
+  }
 
   minusBtn?.addEventListener('click', () => {
     const val = parseInt(input.value);
@@ -145,5 +157,19 @@ const isOutOfStock = stock <= 0;
 
   plusBtn?.addEventListener('click', () => {
     input.value = (parseInt(input.value) + 1).toString();
+  });
+
+  addToCartBtn?.addEventListener('click', () => {
+    if (product) {
+      const quantity = parseInt(input.value);
+      addItem({ ...product, quantity });
+      trackAddToCart(product, quantity);
+      
+      const originalText = addToCartBtn.textContent;
+      addToCartBtn.textContent = 'Přidáno! ✓';
+      setTimeout(() => {
+        addToCartBtn.textContent = originalText;
+      }, 1500);
+    }
   });
 </script>

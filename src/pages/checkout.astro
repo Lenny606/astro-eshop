@@ -226,6 +226,7 @@ import Price from '../components/ui/Price.astro';
   import { cartStore, removeItem, updateQuantity, clearCart } from '../lib/stores/cart';
   import { checkoutStore, updateCheckoutField, clearCheckout } from '../lib/stores/checkout';
   import { actions } from 'astro:actions';
+  import { trackBeginCheckout, trackPurchase } from '../lib/tracking';
 
   let currentStep = 1;
 
@@ -243,6 +244,14 @@ import Price from '../components/ui/Price.astro';
     // Zobrazit aktuální krok
     const currentEl = document.getElementById(`step-${step}`);
     if (currentEl) currentEl.classList.remove('hidden');
+
+    // Tracking
+    if (step === 1) {
+      const items = Object.values(cartStore.get());
+      if (items.length > 0) {
+        trackBeginCheckout(items);
+      }
+    }
 
     // Aktualizovat indikátor (zde by bylo fajn volat CheckoutSteps komponentu, ale Astro je static)
     // Proto ji budeme simulovat jednoduchou manipulací s DOM pro plynulost
@@ -457,8 +466,9 @@ import Price from '../components/ui/Price.astro';
       </div>
     `;
     
+    const items = Object.values(cartStore.get());
     const { data, error } = await actions.simulateOrder({
-      items: Object.values(cartStore.get()).map(i => ({ id: i.id, quantity: i.quantity })),
+      items: items.map(i => ({ id: i.id, quantity: i.quantity })),
       customer: checkoutStore.get()
     });
 
@@ -481,6 +491,9 @@ import Price from '../components/ui/Price.astro';
       const orderIdEl = document.getElementById('order-id-display');
       if (orderIdEl) orderIdEl.textContent = `Číslo objednávky: ${data.orderId}`;
       
+      // Track Purchase
+      trackPurchase(data.orderId, items);
+
       // Vyčistit košík a checkout data po úspěchu
       clearCart();
       clearCheckout();
