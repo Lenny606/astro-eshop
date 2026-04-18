@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CategoryCard from '../components/shop/CategoryCard.astro';
+import { categoryRepository } from '../repositories/category.repository';
+import type { Category } from '../types';
+
+const categories = await categoryRepository.findAll() as Category[];
+---
+
+<Layout title="Kategorie | Astro Shop" description="Prozkoumejte všechny kategorie produktů v našem obchodě.">
+  <main class="container mx-auto px-4 py-32">
+    <header class="mb-16 text-center">
+      <h1 class="text-6xl font-black mb-6 gradient-text uppercase tracking-tighter">
+        Kategorie
+      </h1>
+      <p class="text-xl text-on-surface/60 max-w-2xl mx-auto leading-relaxed">
+        Najděte přesně to, co hledáte. Naše produkty jsou pečlivě roztříděny do kategorií pro váš maximální komfort.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {categories.map(category => (
+        <CategoryCard category={category} />
+      ))}
+    </div>
+  </main>
+</Layout>

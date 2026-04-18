@@ -1,7 +1,7 @@
 import { products } from '../db/schema';
 import { BaseRepository } from './base.repository';
 import { db } from '../db';
-import { eq, gte } from 'drizzle-orm';
+import { eq, gte, sql } from 'drizzle-orm';
 import { logger } from '../lib/logger';
 import { DatabaseError } from '../lib/errors';
 
@@ -61,6 +61,21 @@ export class ProductRepository extends BaseRepository<typeof products> {
       });
     } catch (error) {
       logger.error({ error, categoryId }, 'ProductRepository: findByCategory failed');
+      throw new DatabaseError();
+    }
+  }
+
+  async getRandom(limit: number = 6) {
+    try {
+      return await db.query.products.findMany({
+        limit,
+        orderBy: sql`random()`,
+        with: {
+          category: true,
+        },
+      });
+    } catch (error) {
+      logger.error({ error, limit }, 'ProductRepository: getRandom failed');
       throw new DatabaseError();
     }
   }

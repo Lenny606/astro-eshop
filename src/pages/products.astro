@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/shop/ProductCard.astro';
+import { productRepository } from '../repositories/product.repository';
+import type { ProductWithCategory } from '../types';
+
+const products = await productRepository.findAll() as ProductWithCategory[];
+// Note: In a real app, I'd fetch categories separately to join them if findAll doesn't do it, 
+// but my ProductRepository.findAll inherits from BaseRepository which uses select().from(this.table).
+// I should probably use db.query here to get categories too.
+import { db } from '../db';
+const allProducts = await db.query.products.findMany({
+    with: {
+        category: true
+    }
+}) as ProductWithCategory[];
+---
+
+<Layout title="Produkty | Astro Shop" description="Kompletní nabídka našich prémiových produktů.">
+  <main class="container mx-auto px-4 py-32">
+    <header class="mb-16">
+      <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-8 border-b border-white/5 pb-12">
+        <div>
+          <h1 class="text-6xl font-black gradient-text uppercase tracking-tighter mb-2">
+            Všechny Produkty
+          </h1>
+          <p class="text-on-surface/60 text-lg">Objevte naši kompletní kolekci technologií budoucnosti.</p>
+        </div>
+        <div class="text-on-surface/40 font-bold uppercase tracking-widest text-sm">
+          {allProducts.length} položek celkem
+        </div>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {allProducts.map(product => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+  </main>
+</Layout>
